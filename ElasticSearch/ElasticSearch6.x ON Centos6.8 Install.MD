@@ -32,7 +32,7 @@
     
 #### 修改日志目录和配置参数
     vim elasticsearch.yml
-    # java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled into kernel, CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER are needed
+    # java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled ...
     bootstrap.memory_lock: false
     bootstrap.system_call_filter: false    
 
