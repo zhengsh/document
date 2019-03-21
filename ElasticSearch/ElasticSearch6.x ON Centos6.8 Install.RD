@@ -1,6 +1,6 @@
 ### 安装步骤
     
-    # 添加用户
+#### 添加用户
     useradd elasticsearch 
     
     # 设置目录权限
@@ -9,7 +9,7 @@
     chown -R elasticsearch /data/es6
     
     
-    # 修改系统参数
+#### 修改系统参数
     vim /etc/security/limits.conf
     
     root soft nofile 65535
@@ -26,18 +26,25 @@
     
     vm.max_map_count=262144
     fs.file-max=655350
-
+    
+    # load system param value
     sysctl -p
     
-    # java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled into ker
-    
+#### 修改日志目录和配置参数
     vim elasticsearch.yml
+    # java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled into kernel, CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER are needed
     bootstrap.memory_lock: false
-    bootstrap.system_call_filter: false
-    
-    # 修改日志目录
-    vim elasticsearch.yml
-    
-    # 启动命令 (后台运行)
+    bootstrap.system_call_filter: false    
+
+    # 创建目录
+    mkdir -p /data/es6/data
+    mkdir -p /data/es6/logs
+
+    # 设置目录
+    path.data: /data/es6/data
+    path.log: /data/es6/logs
+
+#### 启动命令 (后台运行)注意需要用elasticsearch 账号来启动
+    su elasticsearch
     ./bin/elasticsearch -d
 
