@@ -31,14 +31,14 @@
     sysctl -p
     
 #### 修改日志目录和配置参数
+    # 创建目录
+    mkdir -p /data/es6/data
+    mkdir -p /data/es6/logs
+    
     vim elasticsearch.yml
     # java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled ...
     bootstrap.memory_lock: false
     bootstrap.system_call_filter: false    
-
-    # 创建目录
-    mkdir -p /data/es6/data
-    mkdir -p /data/es6/logs
 
     # 设置目录
     path.data: /data/es6/data
@@ -47,4 +47,3 @@
 #### 启动命令 (后台运行)注意需要用elasticsearch 账号来启动
     su elasticsearch
     ./bin/elasticsearch -d
-
