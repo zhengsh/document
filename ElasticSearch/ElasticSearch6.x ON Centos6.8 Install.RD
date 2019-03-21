@@ -35,6 +35,8 @@
     bootstrap.memory_lock: false
     bootstrap.system_call_filter: false
     
+    # 修改日志目录
+    vim elasticsearch.yml
     
     # 启动命令 (后台运行)
     ./bin/elasticsearch -d
