@@ -31,6 +31,7 @@
     
     # java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled into ker
     
+    vim elasticsearch.yml
     bootstrap.memory_lock: false
     bootstrap.system_call_filter: false
     
