@@ -1,0 +1,4 @@
+1、对象的hashCode 方法不被当前实力对象重写的时候，的hashcode 值和当前对象去调用
+System.identityHashCode(obj) 的结果相同
+2、如果重写hashCode 方法，那么当前Object 输出的hashCode 值为方法返回值，System.identityHashCode(obj) 依然返回之前的值。
+3、identityHashCode 方法是属于System 类的静态方法调用的是，JVM的本地方法JVM_IHashCode
