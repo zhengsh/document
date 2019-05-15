@@ -31,10 +31,42 @@
 2. 导入第三方的包@Bean
 3. @Import 导入组件（导入组件id 默认是全类名）, ImportSelector 导入的选择器(需要提供导入的全类名数组), ImportBeanDefinitionRegistrar 可以通过调用实现类的 registry.registerBeanDefinition 来注册。
 
+### 使用Spring提供的FactoryBean（工厂Bean）
+1. 默认获取到的工厂是bean 调用getObject创建的对象
+2. 获取工厂Bean本身，我们需要给id前面加一个&符号
+3. 如：&colorFactoryBean
 
+### Bean 的生命周期
+1. Bean 的初始化，销毁的过程
+* 我们可以自定义初始化和销毁方法，当容器Bean进行到当前生命周期的时候会调用我们自定义的初始化和销毁方法,过程遍历所有BeanPostProcessor,挨个执行beforeInitialization,一旦返回Null，跳出for 循环
+  1. populateBean(beanName, mbd, instanceWrapper);
+  2. initBean {
+  3. applyBeanPostProcessorsBeforeInitialization
+  4. invokeInitMethods(beanName, wrappedBean, mbd);
+  5. applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName)
+  6. }
+  
+* a.创建Bean在单例Bean的时候在启动容器的时候会调用Bean实例类的构造方法
+  1. 单例模式：对象创建完成，并赋值好，调用初始化方，容器关闭的时候销毁
+  * 原型模式：容器不会管理容器的销毁 
+* b.通过Bean实现接口
+  1. InitializingBean （定义初始化逻辑）
+  2. DisposableBean（定义销毁逻辑）。
+* c.通过JSR250注解
+  1. @PostConstruct在Bean创建完成和属性赋值完成，
+  2. @PreDestroy,在容器销毁之前的通知
+* d.BeanPostProcessor: Bean的后置处理器，在Bean的初始化前后进行一些处理工作
+  1. postProcessBeforeInitialization: 在初始化之前工作
+  *  postProcessAfterInitaializaion:在初始化后工作
+* Spring 底层对BeanPostProcessor的使用:Bean 赋值，注入其他组件，@Autowired, 生命周期注解功能@Async, xxx BeanPostProcessor，
 
+例子：
 
-
-
+```
+@Bean(initMethod = "init", destroyMethod = "destroy")
+public Car car() {
+    return new Car();
+}
+```
 
 
