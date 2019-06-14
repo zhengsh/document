@@ -1,0 +1,58 @@
+1 Shiro 安全框架
+1.1 目标
+  认识shiro 的整体架构，各个组件的概念
+  shiro 认证，授权的过程
+  shiro 自定义Realm, Filter
+  shiro session 管理
+  shiro 缓存管理
+  shiro 整合spring
+
+1.2 shiro 安全框架简介
+  Apache 的强大灵活的开源安全框架
+  认证、授权、企业会话管理、安全加密
+
+2 shiro 整体架构
+2.1 shiro 与 spring security 的对比
+  apache shiro: 简单、灵活；可脱离spring；粒度较粗
+  spring security: 复杂、笨重；不可脱离spring； 粒度更细
+2.2 shiro 整体架构
+  authenticator 认证器（登入、登出）
+  authorizer 授权器 （用户有那些权限）
+  session manager session 管理器
+  session dao session 的crud 操作
+  cache manager  缓存管理器
+  plugable Reaims  在数据库中认证数据，和 authenticator 、authorizer
+  cryptography 加密
+3 shiro 认证、授权、自定义Realm
+3.1 shiro 认证
+  创建SecurityManager
+  主体提交认证
+  SecurityManager 认证
+  Authenticator 认证
+3.2 shiro 授权
+  创建 SecurityManager 
+  主体授权
+  SecurityManager 授权
+  Authenticator 授权
+  Realm 获取角色权限数据
+  shiro 自定义realm 
+  内置Realm： 
+    IniRealm
+    JdbcRealm
+
+3.3 IniRealm 
+
+3.4 JdbcRealm
+
+3.5 自定义 Realm
+
+3.6 shiro 加密
+  shiro 散列配置
+    hashedCredentialsMatcher
+    自定义Realm 使用散列
+    盐的使用
+
+ 
+
+
+  
