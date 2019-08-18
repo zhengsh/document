@@ -16,4 +16,4 @@
 * ldc 表示将 int, float, String 类型的常量池中推送至栈顶。
 * bipush 表示将单字节（-128 - 127 ）的常量值推送至栈顶
 * sipush 将一个短整形常量值（-32768 - 32767）推送至栈顶
-* icount_1 将int类型的数字1推送至栈顶 (icount_1 ~ icount_5 )
+* icount_1 将int类型的数字1推送至栈顶 (icount_m1 ~ icount_5 )
