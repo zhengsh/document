@@ -236,6 +236,19 @@ SATB声明，在并发标记开始存在的任何对象（整个堆上的标记）被认为是用集合的目的实时
 您还可以指定暂停可以发生的时间段的长度。您可以指定时间跨度的最小mutator使用量（GCPauseIntervalMillis）以及暂停时间目标。默认值为
 MaxGCPauseMillis=200毫秒， GCPauseIntervalMillis(0) 的默认值相当于时间跨度上没有要求。
 
+
+### Garbage-First Garbage Collector Tuning
+
+#### 垃圾收集阶段
+
+#### 年轻代的垃圾收集
+
+#### 混合垃圾收集
+
+#### 标记周期的阶段
+
+### Other Considerations
+
 ### 参考文档
 
  * https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/
