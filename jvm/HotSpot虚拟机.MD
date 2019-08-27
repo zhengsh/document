@@ -1,4 +1,4 @@
-###HosSpotÐéÄâ»ú
+### HosSpotÐéÄâ»ú
 
 #### ¼ò½é
 * Amdahl¶¨ÂÉ£¨¸ø¶¨ÎÊÌâµÄ²¢ÐÐ¼ÓËÙÊÜµ½ÎÊÌâµÄÁ¬Ðø²¿·ÖµÄÏÞÖÆ£©ÒâÎ¶×Å´ó¶àÊý¹¤×÷¸ºÔØÎÞ·¨ÍêÃÀ²¢ÐÐ»¯; Ä³Ð©²¿·ÖÊ¼ÖÕÊÇË³ÐòµÄ£¬²»»áÊÜÒæÓÚ²¢ÐÐÐÔ¡£JavaÆ½Ì¨Ò²ÊÇÈç´Ë¡£ÌØ±ðÊÇ£¬Oracle Java 1.4Ö®Ç°µÄJavaÆ½Ì¨ÐéÄâ»ú²»Ö§³Ö²¢ÐÐÀ¬»øÊÕ¼¯£¬Òò´ËÀ¬»øÊÕ¼¯¶Ô¶à´¦ÀíÆ÷ÏµÍ³µÄÓ°ÏìÏà¶ÔÓÚÆäËû²¢ÐÐÓ¦ÓÃ³ÌÐò¶øÑÔÒ²ÔÚÔö³¤¡£
@@ -171,9 +171,72 @@ CMSÊÕ¼¯Æ÷ÔÚÓ¦ÓÃ³ÌÐòÏß³ÌÈÔÔÚÔËÐÐÖ´ÐÐ´ó²¿·Ö¸ú×ÙºÍÉ¨Ãè¹¤×÷£¬Òò´ËÓ¦ÓÃ³ÌÐòÏß³ÌÖ»ÄÜ¿´µ
 
 
 ### Garbage-First Garbage Collector
+  * Garbage-First (G1) À¬»øÊÕ¼¯Æ÷ÊÇÒ»ÖÖ·þÎñÆ÷Ê½À¬»øÊÕ¼¯Æ÷£¬ÊÊÓÃÓÚ¾ßÓÐ½Ï´óÄÚ´æµÄ¶à³öÁ¦»úÆ÷£¬Ëü³¢ÊÔÒÔ¸ß¸ÅÂÊÂú×ãÀ¬»øÊÕ¼¯£¨GC£©ÔÝÍ£Ê±¼äÄ¿±ê£¬
+Í¬Ê±ÊµÏÖ¸ßÍÌÍÂÁ¿¡£È«¶Ñ²Ù×÷£¨ÀýÈç£ºÈ«¾Ö±ê¼Ç£©ÓëÓ¦ÓÃ³ÌÐòÏß³ÌÍ¬Ê±Ö´ÐÐ¡£Õâ¿ÉÒÔ·½Ê½Óë¶Ñ»òÊµÊ±Êý¾Ý´óÐ¡³É±ÈÀýµÄÖÐ¶Ï¡£
+  
+  * G1ÊÕ¼¯Æ÷Í¨¹ý¶àÖÖ¼¼ÊõÊµÏÖÁË¸ßÐÂ¸üÄÜºÍÔÝÍ£Ê±¼äÄ¿±ê
+  
+  * ¶Ñ±»·ÖÇøÎªÒ»×é´óÐ¡ÏàµÈµÄ¶ÑÇøÓò£¬Ã¿¸ö¶ÑÇøÓò¶¼ÊÇÁ¬ÐøµÄÐéÄâÄÚ´æ·¶Î§¡£G1Ö´ÐÐ²¢·¢È«¾Ö±ê¼Ç½×¶ÎÒÔÈ·¶¨Õû¸ö¶ÑÖÐµÄ¶ÔÏó»îÔ¾¶È¡£ÔÚ±ê¼Ç½×¶Î£¬Íê³Éºó£¬
+G1Ö´ÐÐ²¢·¢È«¾Ö±ê¼Ç½×¶ÎÒÔÈ·¶¨Õû¸ö¶ÑÖÐ¶ÔÏóµÄ»îÔ¾¶È¡£ÔÚ±ê¼Ç½×¶ÎÍê³Éºó£¬G1ÖªµÀÄÇÐ©ÇøÓò»ù±¾ÉÏÊÇ¿ÕµÄ¡£ËüÊ×ÏÈÊÕ¼¯ÕâÐ©ÇøÓò¡£ÕâÍ¨³£»á²úÉú´óÁ¿µÄ×ÔÓÉ¿Õ¼ä¡£
+Õâ¾ÍÊÇÎªÊ²Ã´ÕâÖÖÀ¬»øÊÖ»ú·½·¨³ÆÎªGarbage-First. ¹ËÃûË¼Òå£¬G1½«±»Æä¼¯ºÏºÍÑ¹Ëõ»î¶¯¼¯ÖÐÔÚ¶ÑµÄ¿ÉÄÜÌî³äÂú¿É»ØÊÕ¶ÔÏóµÄÇøÓò£¬¼´À¬»ø¡£G1Ê¹ÓÃÔÝÍ£Ô¤²â
+Ä£ÐÍÀ´Âú×ãÓÃ»§¶¨ÒåµÄÔÝÍ£Ê±¼äÄ¿±ê£¬²¢¸ù¾ÝÖ¸¶¨µÄÔÝÍ£Ê±¼äÄ¿±êÑ¡ÔñÐèÒªÊÖ»úµÄÇøÓòÊý¡£
 
+  * G1½«¶ÔÏó´Ó¶ÑµÄÒ»¸ö»ò¶à¸öÇøÓò¸´ÖÆµ½¶ÑÉÏµÄµ¥¸öÇøÓò£¬²¢ÇÒÔÚ´Ë¹ý³ÌÖÐÑ¹Ëõ²¢ÊÍ·ÅÄÚ´æ£¬ÕâÖÖÊèÉ¢ÔÚ¶à´¦ÀíÆ÷ÉÏ²¢ÐÐÖ´ÐÐ¡£ÒÔ¼õÉÙÔÝÍ£Ê±¼ä²¢ÇÒÌá¸ßÍÌÍÂÁ¿¡£
+Òò´Ë£¬Ã¿´ÎÀ¬»øÊÖ»ú£¬G1¶¼»á²»¶ÔÅ¬Á¦½ÏÉÙËéÆ¬£¬Õâ¸ö³¬³öÁËÒÔÇ°Á½ÖÖ·½·¨µÄÄÜÁ¦£¬CMS£¨Concurrent Mark Sweep£©À¬»øÊÕ¼¯²»½øÐÐÑ¹Ëõ£¬²¢ÐÐÑ¹Ëõ½öÖ´ÐÐÕû¶ÑÑ¹Ëõ
+²¢ÐÐÑ¹Ëõ½öÖ´ÐÐÕû¶ÑÑ¹Ëõ£¬Õâ»áµ¼ÖÂÏàµ±³¤µÄÔÝÍ£Ê±¼ä¡£
 
+  * G1µÄµÚÒ»¸öÖØµãÊÇÎªÔËÐÐÐèÒª¾ßÓÐÓÐÏÞGCÑÓ³ÙµÄ´ó¶ÑÓ¦ÓÃ³ÌÐòµÄÓÃ»§Ìá¹©½â¾ö·½°¸£¬ÕâÒâÎ¶×Å¶Ñ´óÐ¡Ô¼Îª6GB»ò¸ü´ó£¬²¢ÇÒÎÈ¶¨ÇÒ¿ÉÔ¤²âµÄÔÝÍ£Ê±¼ä
+µÍÓÚ0.5Ãë¡£
+   
+  * Èç¹ûÓ¦ÓÃ³ÌÐò¾ßÓÐÒ»ÏÂ»ò¶à¸öÌØÕ÷£¬ÄÇÃ´½ñÌìÎÒÃÇCMS»ò²¢ÐÐÑ¹ËõµÄÓ¦ÓÃ³ÌÐò½«´ÓÇÐ»»µ½G1ÖÐÊÕÒæ¡£
+    * ³¬¹ý50%µÄjava¶ÑÕ¼ÓÃÁËÊµÊ±Êý¾Ý¡£
+    * ¶ÔÏó·ÖÅäÂÊ»ò´ÙÏúÂÊ²îÒìºÜ´ó
+    * ¸ÃÓ¦ÓÃ³ÌÐòÕýÔÚ¾­Àú²»Ï£ÍûµÄ³¤À¬»øÊÖ»ú»òÑ¹ËõÔÝÍ££¨³¬¹ý0.5µ½1Ãë£©
+
+  * G1 ¼ÆËãÊÇ×÷Îª Concurrent Mark-Sweep Collector (CMS) µÄ³¤ÆÚÌæ´úÆ·£¬½«G1ÓëCMS½øÐÐ±È½Ï½ÒÊ¾ÁËÊ¹G1³ÉÎª¸üºÃ½â¾ö·½°¸µÄ²îÒì¡£Ò»¸öÇø±ðÊÇ
+G1ÊÇÑ¹ËõÊÕ¼¯Æ÷£¬´ËÍâ£¬G1Ìá¹©±ÈCMSÊÕ¼¯Æ÷¸ü¿ÉÔ¤²âµÄÀ¬»øÊÖ»úÔÝÍ££¬²¢ÔÊÐíÓÃ»§Ö¸¶¨ËùÐèµÄÔÝÍ£Ä¿±ê¡£
+
+  * ÓëCMSÒ»Ñù£¬G1×¨ÎªÐèÒª½Ï¶ÌGCÔÝÍ£µÄÓ¦ÓÃ¶øÉè¼Æ¡£
+  
+  * G1ÔÚÂß¼­ÒâÒåÉÏÊÇÊÀ´úµÄ¡£Ò»×é¿ÕÇøÓò±»Ö¸¶¨ÎªÂß¼­ÄêÇá´ú£¬ÔÚÍ¼ÖÐ£¬ÄêÇáÒ»´úÊÇÇ³À¶É«¡£·ÖÅäÊÇ´ÓÄÇ¸öºÏºõÂß¼­µÄÄêÇáÒ»´úÍê³ÉµÄ¡£
+µ±ÄêÇáÒ»´ú³äÂúÊ±£¬ÄÇ×éµØÇø±»À¬»øÊÕ¼¯Æ÷£¨Ò»¸öÄêÇáµÄÊÕ²Ø£©¡£ÔÚÄ³Ð©Çé¿öÏÂ£¬ÄêÇáÇøÓòÒÔÍâµÄÇøÓò£¨ÉîÀ¶É«µÄ¾ÉÇøÓò£©¿ÉÒÔÍ¬Ê±½øÐÐÀ¬»øÊÕ¼¯£¬
+Õâ±­³ÆÎª»ìºÏ¼¯ºÏ£¬ÔÚ¸ÃÍ¼ÖÐ£¬ÊÕ¼¯µÄÇøÓòÓÃºìÉ«¿ò±ê¼Ç¡£¸ÃÍ¼Ãè»æÁËÒ»¸ö»ìºÏÊÕ²ØÆ·£¬ÒòÎªÕýÔÚÊÕ¼¯ÄêÇáµØÇøºÍ¾ÉµØÇø¡£À¬»øÊÕ¼¯ÊÇÒ»¸öÑ¹Ëõ¼¯ºÏ£¬Ëü½«
+»î¶¯¶ÔÏó¸´ÖÆµ½Ñ¡¶¨µÄ×î³õÎª¿ÕµÄÇøÓò£¬»ùÓÚÐÒ´æÎïÌåµÄÄêÁä£¬¿ÉÒÔ½«ÎïÌå¸´ÖÆ»áµ½ÐÒ´æÇø£¬£¨±ê¼ÇÎª ¡°S¡±£© »òÕßÀÏÄê´ú£¨Î´¾ßÌå±êÊ¶£©
+±êÓÐ¡°H¡±µÄÇøÓò°üº¬´óÓÚ°ë¸öÇøÓòÇÒ¾­¹ýÌØÊâ´¦ÀíµÄ¾Þ´óÎïÌå¡£
+
+#### ·ÖÅä£¨ÊèÉ¢£©Ê§°Ü
+  * ºÍCMSÒ»ÑùG1ÊÕ¼¯Æ÷ÔÚÓ¦ÓÃ³ÌÐò¼ÌÐøÔËÐÐÊ±£¬ÔËÐÐÆä¼¯ºÏµÄÒ»²¿·Ö£¬²¢ÇÒ´æÔÚÓ¦ÓÃ³ÌÐò·ÖÅä¶ÔÏóµÄËÙ¶È¿ìÓÚÀ¬»øÊÕ¼¯Æ÷£¬¿ÉÒÔ»Ö¸´¿ÉÓÃ¿Õ¼äµÄ·çÏÕ¡£
+ÔÚG1ÖÐ£¬G1ÕýÔÚ½«ÊµÊ±Êý¾Ý´ÓÒ»¸öÇøÓò£¨³·Àë£©¸´ÖÆµ½ÁíÒ»¸öÇøÓòÊ±·¢Éú¹ÊÕÏ£¨Java¶ÑºÄ¾¡£©¡£½øÐÐ¸´ÖÆÒÔÑ¹ËõÊµÊ±Êý¾Ý¡£Èç¹ûÔÚ³·Àë±»À¬»øÊÕ¼¯µÄÇøÓòÆÚ¼ä
+ÎÞ·¨ÕÒµ½¿ÕÏÐ£¨¿Õ£©ÇøÓò£¬ Ôò»á·¢Éú·ÖÅäÊ§°Ü£¨ÒòÎªÃ»ÓÐ¿Õ¼äÀ´·ÖÅäÀ´×Ô³·ÀëÇøÓòµÄ»î¶¯¶ÔÏó£©ºÍÍ£Ö¹ÊÀ½ç£¨STW£©ÍêÕûÊÕ²ØÍê³É¡£
+
+#### ¸¡¶¯À¬»ø
+  * ¶ÔÏó¿ÉÄÜÔÚG1¼¯ºÏÆÚ¼äËÀÍö¶ø²»±»ÊÕ¼¯£¬G1Ê¹ÓÃÒ»ÖÖÃûÎªsnapshot-at-the-beginning (SATB) µÄ¼¼ÊõÀ´±£Ö¤À¬»øÊÕ¼¯Æ÷ÕÒµ½ËùÓÐ»î¶¯¶ÔÏó¡£
+SATBÉùÃ÷£¬ÔÚ²¢·¢±ê¼Ç¿ªÊ¼´æÔÚµÄÈÎºÎ¶ÔÏó£¨Õû¸ö¶ÑÉÏµÄ±ê¼Ç£©±»ÈÏÎªÊÇÓÃ¼¯ºÏµÄÄ¿µÄÊµÊ±¶ÔÏó£¬SATBÔÊÐí¸¡¶¯À¬»øµÄ·½Ê½ÀàËÆÓÚCMSÔöÁ¿¸üÐÂ¡£
+
+#### ÔÝÍ£
+  * G1ÔÝÍ£Ó¦ÓÃ³ÌÐòÒÔ½«»î¶¯¶ÔÏó¸´ÖÆµ½ÐÂÇøÓò¡£ÕâÐ©Í£¶Ù¿ÉÒÔÊÇÄêÆÚ´úÊÕ¼¯Í£¶Ù¡£Ö»ÊÕ¼¯ÄêÇá´ú»ò»ìºÏÊÕ¼¯ÔÝÍ£¡£ÄêÇáºÍÄêÀÏ´ú³·Àë¡£ÓëCMSÒ»Ñù£¬×îÖÕ±ê¼Ç»ò
+±¸×¢ÔÝÍ£¿ÉÔÚÓ¦ÓÃ³ÌÐòÍ£Ö¹Ê±Íê³É±ê¼Ç¡£ËäÈ»CMSÒ²ÓÐ³õÊ¼±ê¼ÇÔÝÍ££¬µ«G1»á½«³õÊ¼±ê¼Ç¹¤×÷×÷ÎªÊèÉ¢ÔÝÍ£µÄÒ»²¿·Ö£¬G1ÔÚ¼¯ºÏµÄÄ©Î²ÓÐÒ»¸öÇåÀí½×¶Î£¬²¿·ÖÊÇSTW
+²¿·ÖÊÇ²¢·¢µÄ£¬ÇåÀíSTW²¿·ÖÊ¶±ð¿ÕÇøÓò²¢È·¶¨×÷ÎªÏÂÒ»¸ö¼¯ºÏµÄºòÑ¡¾ÉÇøÓò¡£
+
+#### ¿¨±íºÍ²¢·¢½×¶Î
+  * Èç¹ûÀ¬»øÊÕ¼¯Æ÷²»ÊÕ¼¯Õû¸ö¶Ñ£¨ÔöÁ¿¼¯ºÏ£©£¬ÔòÀ¬»øÊÕ¼¯Æ÷ÐèÒªÖªµÀ´Ó¶ÑµÄÎ´ÊÕ¼¯²¿·Öµ½ÕýÔÚÊÕ¼¯µÄ¶ÑµÄ²¿·ÖÖÐµÄÖ¸Õë£¬ÕâÍ¨³£ÓÃÓÚ·Û÷ìÀ¬»øÊÕ¼¯Æ÷£¬
+ÆäÖÐ¶ÑÖÐµÄÎ´ÊÕ¼¯²¿·ÖÍ¨³£ÊÇ¾É´ú£¬²¢ÇÒ¶ÑµÄÊÕ¼¯²¿·ÖÊÇÄêÇá´ú¡£ÓÃÓÚ±£´æ´ËÐÅÏ¢µÄÊý¾Ý½á¹¹£¨¾É´úÖ¸ÕëÖ¸ÏòÄêÇá´ú¶ÔÏó£©ÊÇÒ»¸ö¼ÇÒä¼¯¡£¿¨±íÊÇÒ»¸öµÄ¶¨ÀàÐÍ
+µÄ¼ÇÂ¼Î»ÖÃµÄ£¬ Java HotSpot VM Ê¹ÓÃ×Ö½ÚÊý×é×÷Îª¿¨±í£¬Ã¿¸ö×Ö½Ú³ÆÎª¿¨£¬¿¨¶ÔÓ¦ÓÚ¶ÑÖÐµÄÒ»ÏµÁÐµØÖ·£¬ÅªÔà¿¨ÒâÎ¶×Å½«×Ö½ÚÖµ¸ü¸ÄÎªÔàÖµ£¬ÔàÖµ¿ÉÄÜ°üº¬´Ó¿¨
+µÄ¸²¸ÇµØÖ··¶Î§ÄÚµÄ¾É´úµ½ÄêÇá´úµÄÐÂÖ¸Õë¡£
+ 
+#### Æô¶¯²¢·¢ÊÕ¼¯ÖÜÆÚ
+  * ÈçÇ°ËùÊö£¬ ÄêÇá´úºÍÄêÀÏ´ú¶¼ÊÇÀ¬»øÊÕ¼¯µÄ»ìºÏÊÕ¼¯£¬ÎªÁËÊÕ¼¯¾ÉÇøÓò£¬G1¶ÑÖÐ»î¶¯½øÐÐÁËÍêÕû±ê¼Ç£¬ÕâÖÖ±ê¼ÇÍ¨¹ý²¢ÐÐ±ê¼Ç½×¶ÎÍê³ÉµÄ£¬µ±Õû¸öJava¶Ñ
+µÄÕ¼ÓÃÂÊ´ïµ½²ÎÊýÖµµÄÊ±ºò£¬½«Æô¶¯²¢·¢±ê¼Ç½×¶ÎInitiatingHeapOccupancyPercent. Ê¹ÓÃÃüÁîÐÐÑ¡ÏîÉèÖÃ´Ë²ÎÊýµÄÖµ
+-XX£ºInitiatingHeapOccupancyPercent=<NN>. Ä¬ÈÏÖµÎªInitiatingHeapOccupancyPercent=45
+
+#### ÔÝÍ£Ê±¼äÄ¿±ê
+  * Ê¹ÓÃ±êÖ¾ÉèÖÃG1µÄÔÝÍ£Ê±¼äÄ¿±êMaxGCPauseMillis. G1Ê¹ÓÃÔ¤²âÄ£ÐÍÀ´È·¶¨£¬ÔÚ¸ÃÄ¿±êÔÝÍ£Ê±¼äÄÚ¿ÉÒÔÍä³Á¶àÉÙÀ¬»øÊÕ¼¯¹¤×÷£¬ÔÚ¼¯ºÏµÄ×îºó£¬G1Ñ¡Ôñ
+ÒªÔÚÏÂÒ»¸ö¼¯ºÏ£¨¼¯ºÏ¼¯£©ÖÐÊÕ¼¯µÄÇøÓò¡£¼¯ºÏ¼¯½«°üº¬ÄêÇáÇøÓò£¨Æä´óÐ¡µÄ×ÛºÏ¾ö¶¨ÁËÂß¼­ÄêÇá´úµÄ´óÐ¡£©¡£²¿·ÖÊÇÍ¨¹ýÑ¡Ôñ¼¯ºÏ¼¯ÖÐµÄÄêÇáÇøÓòµÄÊýÁ¿£¬G1
+¿ØÖÆGCÔÝÍ£µÄ³¤¶È¡£Äú¿ÉÒÔÏñÔÚÆäËûÀ¬»øÊÕ¼¯Æ÷ÖÐÒ»ÑùÔÚÃüÁîÐÐÉÏÖ¸¶¨ÄêÇá´úµÄ´óÐ¡£¬µ«ÕâÑù×ö¿ÉÄÜ»á·Á°­G1´ïµ½Ä¿±êÔÝÍ£Ê±¼äµÄÄÜÁ¦£¬³ýÁËÔÝÍ£Ê±¼äÄ¿±êÍâ£¬
+Äú»¹¿ÉÒÔÖ¸¶¨ÔÝÍ£¿ÉÒÔ·¢ÉúµÄÊ±¼ä¶ÎµÄ³¤¶È¡£Äú¿ÉÒÔÖ¸¶¨Ê±¼ä¿ç¶ÈµÄ×îÐ¡mutatorÊ¹ÓÃÁ¿£¨GCPauseIntervalMillis£©ÒÔ¼°ÔÝÍ£Ê±¼äÄ¿±ê¡£Ä¬ÈÏÖµÎª
+MaxGCPauseMillis=200ºÁÃë£¬ GCPauseIntervalMillis(0) µÄÄ¬ÈÏÖµÏàµ±ÓÚÊ±¼ä¿ç¶ÈÉÏÃ»ÓÐÒªÇó¡£
 
 ### ²Î¿¼ÎÄµµ
 
  * https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/
+ * https://jayfeng.com/2016/03/11/%E7%90%86%E8%A7%A3Java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/
