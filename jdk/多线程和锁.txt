@@ -1,8 +1,0 @@
-1、认识Shiro的整体架构，各种组件的概念
-2、Shiro热证，授权过程
-3、Shiro自定义 Realm, Filter
-
-目标：
-Shiro Session 管理
-Shiro 换成管理
-Shiro 集成Spring
