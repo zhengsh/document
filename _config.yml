@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+
+plugins:
+    - jekyll-paginate
+    - jekyll-sitemap
