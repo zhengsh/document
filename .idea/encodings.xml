@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/jdk1.8/Java 内存分区.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/jdk1.8/Serializable.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/jdk1.8/String 字符串.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/jdk1.8/Synchronized 关键字.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/jdk1.8/hashCode 和 System.identityHashCode.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/jvm/HotSpot虚拟机.MD" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/中间件/Kafka简介.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/中间件/Shiro 安全框架.txt" charset="GBK" />
+    <file url="PROJECT" charset="GBK" />
+  </component>
+</project>
