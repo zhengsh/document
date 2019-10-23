@@ -41,7 +41,7 @@ ReadWriteLock 维护了一对相关的锁，一个用于只读操作，另外一
 很有作用。如果reader 视图获取读写锁，那么永远不会获得成功。
 
 * 降级锁
-  重入还允许写入锁降级为读取锁，其实现方式是：先获取写入锁，然后获取读取锁，最后释放写入锁，但是，从读取锁升级到写入锁时不可能的。
+  重入还允许写入锁降级为读取锁，其实现方式是：先获取写入锁，然后获取读取锁，最后释放写入锁，但是，从读取锁升级到写入锁是不可能的。
   
 * 锁获取的中断
   读取锁和写入锁支持锁获取期间的中断
@@ -56,10 +56,53 @@ Condition 只能用于写锁。读取锁不支持 Condition， readLock().newCon
 
 用法实例：
 
-1. 降级锁
+#### 1. 降级锁
+* 锁降级是指当前线程把持有的写锁再去获取读锁，随后释放先前拥有的写锁的过程。
+
+* 读锁时共享锁，写锁是排它锁。如果写锁释放之前释放了写锁。会造成别的线程很快又拿到了写锁，然后阻塞读锁。造成数据的不可控性，也造成了不必要的cpu
+资源浪费，写只需要一个线程来执行，然后共享锁，不需要多线程都去获取这个写锁，如果先释放写锁，然后再去获取读锁后果也是如此。
+
+jdk 提供的案例如下：
 
 ```java
+class CachedData {
+   Object data;
+   volatile boolean cacheValid;
+   final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 
+   void processCachedData() {
+     rwl.readLock().lock();
+     if (!cacheValid) {
+       // Must release read lock before acquiring write lock
+       rwl.readLock().unlock();
+       rwl.writeLock().lock();
+       try {
+         // Recheck state because another thread might have
+         // acquired write lock and changed state before we did.
+         if (!cacheValid) {
+           data = ...
+           cacheValid = true;
+         }
+         // Downgrade by acquiring read lock before releasing write lock
+         rwl.readLock().lock();
+       } finally {
+         rwl.writeLock().unlock(); // Unlock write, still hold read
+       }
+     }
+
+     try {
+       use(data);
+     } finally {
+       rwl.readLock().unlock();
+     }
+   }
+}
 ```
-  
 
+*总结
+  * 写锁释放后，读锁全部会争夺资源。
+  * 如果在释放写锁之前去拿到读锁，再去释放写锁，可以规避读锁的一些资源争抢。
+  
+* 思考
+  * 没有感知到数据变化的读锁会冲进来继续占用写锁，阻塞已完成写操作的线程会继续获取读锁。
+  * 为了性能，因为读锁的抢占必将引起资源分配和判断等操作，降级锁减少了线程柱塞和唤醒，试试连续性更强。
