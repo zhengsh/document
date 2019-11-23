@@ -1,5 +1,6 @@
 
 -XX:+TraceClassLoading 用于追踪类的加载信息并打印出来
+-XX:+TraceClassUnloading 用于追踪类的卸载
 
 -XX:+<option>, 表示开启option选项
 -XX:-<option>, 表示关闭option选项
