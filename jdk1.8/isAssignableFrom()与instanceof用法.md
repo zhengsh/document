@@ -1,4 +1,4 @@
-#### isAssignableFrom()方法与instanceof关键字区别
+#### isAssignableFrom()方法与instanceof关键字区别\
 * Class.isAssignableFrom() 是用来判断Class1 和另一个类 Class2 是否相同或者是另一个类的父类或者接口。
 
 ```java
