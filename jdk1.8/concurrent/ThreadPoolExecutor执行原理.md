@@ -391,4 +391,4 @@ private void processWorkerExit(Worker w, boolean completedAbruptly) {
 工作线程的生命周期，从 execute 方法开始， Worker 使用ThreadFactory 创建型的工作线程，runWorker 通过getTask获取任务，然后执行任务， 
 如果getTask返回null, 进入processWorkerExit, 整个线程结束。
 
-![avatar](image/1.png)
+![avatar](image/2.png)
