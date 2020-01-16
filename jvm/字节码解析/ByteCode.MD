@@ -3,7 +3,7 @@
 class 文件分为：MagicNumber, Version, Constant_pool, Access_flag, This_class，Super_class, interface, Fields, Methods 
 和 Attributes 这十个部分， 用一个数据结构可以表示如下：
 
-![avatar](../image/1.PNG)
+![avatar](../../images/jvm/bytecode/1.PNG)
 
 
 1、magic 
@@ -22,7 +22,7 @@ class 文件分为：MagicNumber, Version, Constant_pool, Access_flag, This_class，Su
   
 3、 constant_pool  
 
-![avatar](../image/2.PNG)
+![avatar](../../images/jvm/bytecode/2.PNG)
 
 
 ```
