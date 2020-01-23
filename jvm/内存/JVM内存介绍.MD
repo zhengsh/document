@@ -41,4 +41,8 @@ new 关键创建对象的3个步骤
 -Xms2m
 -Xmx2m
 -XX:+HeapDumpOnOutOfMemoryError
+
+-XX:MaxMetaspaceSize=10m  //设置元空间大小
 ```
+
+#### Jdk1.8 元空间
