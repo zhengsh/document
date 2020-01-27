@@ -46,3 +46,24 @@ new 关键创建对象的3个步骤
 ```
 
 #### Jdk1.8 元空间
+元空间存储类的基本元数据,如类的层级信息,方法数据和方法信息（如字节码，栈和变量大小),运行时常量池,已确定的符号引用和虚方法表。
+
+
+#### jcmd（从jdk1.7开始新增加的命令）
+
+1. jcmd pid VM.flags 查看jvm的启动参数
+2. jcmd pid help 查看当前可用命令
+3. jcmd pid help JFR.dump 查看具体命令的选项
+4. jcmd pid PerfCounter.print 查看JVM性能相关的参数
+5. jcmd pid VM.uptime 查看类的启动时长
+6. jcmd pid GC.class_histogram: 查看类的统计信息
+7. jcmd pid Thread.print: 查看线程的堆栈信息
+8. jcmd pid GC.heap_dump filename: 导出Heap Dump文件, 导出的文件可以通过jvisualvm 查看
+9. jcmd pid VM.system_properties: 查看JVM的属性
+10. jcmd pid VM.version: 查看JVM进程的版本信息
+11. jcmd pid VM.command_line: 查看JVM启动的命令行参数信息
+
+#### Jstack
+查看或者导出Java进程中的堆栈信息
+jmc: 
+jhat: 分析堆转储信息, 在jdk9 以后已被移除. 移除原因: https://www.infoq.com/news/2015/12/OpenJDK-9-removal-of-HPROF-jhat/
