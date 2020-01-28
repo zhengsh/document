@@ -77,6 +77,18 @@ CMS 通过将大量工作分散到并发处理阶段来减少STW时间，在这�
 * 对于堆较大的应用，GC的时间难以预估
 
 ### CMS GC日志实例
+* JVM 参数
+```
+-verbose:gc
+-Xms20M
+-Xmx20M
+-Xmn10M
+-XX:+PrintGCDetails
+-XX:SurvivorRatio=8
+-XX:+UseConcMarkSweepGC //设置使用CMS回收器
+```
+
+* GC 日志
 ```
 [GC (CMS Initial Mark) [1 CMS-initial-mark: 8194K(10240K)] 12935K(19456K), 0.0004987 secs] [Times: user=0.00 sys=0.01, real=0.00 secs] 
 [CMS-concurrent-mark-start]
