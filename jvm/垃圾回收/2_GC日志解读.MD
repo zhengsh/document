@@ -78,6 +78,9 @@ Heap
 ```
 * Full GC 一般是年老代触发的GC
 * Ergonomics 是以种标识，
-* PSYoungGen: 6933K->3507K(9216K) 
-* ParOldGen: 7176K->7168K(10240K) 老年代的对象增多，是由于部分来自新生代
+* PSYoungGen: 6933K->3507K(9216K) ，采用Parallel Scavenge 新生代垃圾收集器 
+* ParOldGen: 7176K->7168K(10240K) ，采用Parallel Old 老年代垃圾收集器 ，老年代的对象增多，是由于部分来自新生代
 * Metaspace: 元空间
+
+### 注意
+* 在新生代内存不足的时候，但是遇到了大对象会直接存储到老年代中。
