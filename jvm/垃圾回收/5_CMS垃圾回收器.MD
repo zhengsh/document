@@ -18,28 +18,6 @@
 的内存回收过程是与用户线程一起并发执行的。
 ![avatar](../../images/jvm/gc/3.PNG)
 
-* 优点
-  * 并发收集、低停顿，Oracle公司的一些官方文档中也成称之为并发低停顿收集器（Concurrent Low Pause Collector）
-* 缺点
-  * CMS 收集器堆CPU资源非常敏感
-  * CMS 收集器无法处理**浮动垃圾（Floating Garbage）**， 可能出现"Concurrent Mode Failure" 失败而导致另一次Full GC的产生。如果在应用中
-老年代增长不是太快，可以适当调高参数-XX:CMSInitiatingOccupancyFraction 的值来提高触发百分比，以便减低内存回收次数从而获取更好的的性能。
-要是CMS运行期间预留的内存无法满足程序需要时，虚拟机将启动后备预案：临时启用Serial Old收集器来重新进行老年代的垃圾收集，这样停顿时间就长了。所以说参数
--XX:CMSInitiatingOccupancyFraction 设置得太高很容易导致大量的"Concurrent Mode Failure"失败，性能反而降低。
-  * 收集结束时会有大量空间碎片产生， 空间碎片过多时， 将会给大独享分配带来很大的麻烦，往往出现老年代还有很大空间剩余，但是无法找到足够大的连续空间来分配当前
-对象，不得不提前进行一次Full GC。CMS收集器提供了一个-XX:UseCMSCompactAtFullCollection 开关参数（默认是开启的），用于在CMS收集器顶不住的时候
-进行Full GC开启内存碎片的合并整理过程，内存整理的过程是无法并发的，空间碎片问题没有了，但停顿的事件不得不变长。
-
-### 空间分配担保
-* 在发生Minor GC之前，虚拟机会先检查老年代最大可用连续空间是否大于新生代所有对象总空间，如果这个条件成立，那么Minor GC 可以确保是安全的。
-当大量对象在Minor GC 后依然存活，就需要老年代进行空间分配担保，把Survivor无法容纳的对象直接进入老年代，如果老年代判断到神域空间不足（根据以往每一次
-回收晋升到老年代对象容量的平均值作为经验值），则进行一次Full GC
-
-### CMS收集器收集步骤
-* Phase 1: Initial Mark （初始标记）
-  * 这个是CMS两次stop-the-world事件的其中一次，这个阶段的目标是：标记哪些直接被GC Root 引用或者被年轻代存活对象所引用的所有对象。
-  ![avatar](../../images/jvm/gc/4.PNG)
-
 * Phase 2: Concurrent Mark （并发标记）
   * 在这个阶段 Garbage Collector 会遍历老年代，然后标记所有存活的对象，它会更具上个阶段找到的GC Roots 遍历查找。并发标记阶段，
 他会与用户的应用程序并发运行。 并不是老年代所有的存活对象都会被标记， 因为在标记期间用户的程序可能会改变一些引用
