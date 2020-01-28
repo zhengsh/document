@@ -58,3 +58,26 @@ Heap
   * 新生代回收内存：6195-624  = 5571k  //执行完gc后，新生代执行垃圾回收后堆空间回收内存
   * 实际的回收内存：6195-4728 = 1467k  //执行完gc后，总的堆空间释放的容量
   * 年老代使用内存：5571-1467 = 4104k  (新生代的释放内存：会分为1.新生代->老年代，2.真实被回收)   
+
+### Full GC 
+GC 日志
+```
+[GC (Allocation Failure) [PSYoungGen: 6195K->614K(9216K)] 6195K->4710K(19456K), 0.0127704 secs] [Times: user=0.01 sys=0.01, real=0.01 secs] 
+[GC (Allocation Failure) --[PSYoungGen: 6999K->6999K(9216K)] 11095K->15199K(19456K), 0.0106521 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+[Full GC (Ergonomics) [PSYoungGen: 6999K->2489K(9216K)] [ParOldGen: 8200K->8192K(10240K)] 15199K->10681K(19456K), [Metaspace: 3070K->3070K(1056768K)], 0.0075955 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+hello world
+Heap
+ PSYoungGen      total 9216K, used 4977K [0x00000007bf600000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 8192K, 60% used [0x00000007bf600000,0x00000007bfadc7a8,0x00000007bfe00000)
+  from space 1024K, 0% used [0x00000007bfe00000,0x00000007bfe00000,0x00000007bff00000)
+  to   space 1024K, 0% used [0x00000007bff00000,0x00000007bff00000,0x00000007c0000000)
+ ParOldGen       total 10240K, used 8192K [0x00000007bec00000, 0x00000007bf600000, 0x00000007bf600000)
+  object space 10240K, 80% used [0x00000007bec00000,0x00000007bf4000d8,0x00000007bf600000)
+ Metaspace       used 3150K, capacity 4496K, committed 4864K, reserved 1056768K
+  class space    used 346K, capacity 388K, committed 512K, reserved 1048576K
+```
+* Full GC 一般是年老代触发的GC
+* Ergonomics 是以种标识，
+* PSYoungGen: 6933K->3507K(9216K) 
+* ParOldGen: 7176K->7168K(10240K) 老年代的对象增多，是由于部分来自新生代
+* Metaspace: 元空间
