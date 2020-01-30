@@ -97,7 +97,6 @@ GC的Safepoint. 但如果程序在"不执行"的时候呢？ 所谓恒旭不执�
   * 这个也是一个并发阶段，与应用的线程并发运行，并不会stop应用的线程。在并发运行的过程中，一些对象可能会发生变化，但是这种情况发生时。JVM
 将会包含这个对象的区域（Card）标记为Dirty, 这也就是Card Marking.
   * 在pre-clean 阶段，哪些能够从Dirty 对象到达的对象也会被标记，这个标记做完后，dirty card 标记就会被清除了。
-  ![avatar](../../images/jvm/gc/cms_setup_3.png)
 
 * Phase 4: Concurrent Abortable Preclean （并发预先可能失败的清理）
   * 这也是一个并发阶段，但是同样不会影响用户的应用线程，这个阶段是为了尽量承担 STW （stop-the-world）中最终标记阶段的工作。这个阶段
