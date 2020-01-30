@@ -84,18 +84,21 @@ GC的Safepoint. 但如果程序在"不执行"的时候呢？ 所谓恒旭不执�
   * Phase 7: Concurrent Reset
 
 * Phase 1: Initial Mark （初始标记）
+  * 这个是CMS两次stop-the-world事件的其中一次，这个阶段的目标是：标记哪些直接被GC Root引用或者被年轻代存活对象所引用的所有对象
+  ![avatar](../../images/jvm/gc/cms_setup_1.png)
 
 * Phase 2: Concurrent Mark （并发标记）
   * 在这个阶段 Garbage Collector 会遍历老年代，然后标记所有存活的对象，它会更具上个阶段找到的GC Roots 遍历查找。并发标记阶段，
 他会与用户的应用程序并发运行。 并不是老年代所有的存活对象都会被标记， 因为在标记期间用户的程序可能会改变一些引用
-  ![avatar](../../images/jvm/gc/5.PNG)
+  ![avatar](../../images/jvm/gc/cms_setup_2.png)
   * 在上面的图中，与阶段1的图进行对比就会发现有一个对象的引用已经发生额变化。
   
 * Phase 3: Concurrent Preclean (并发预先清理)
   * 这个也是一个并发阶段，与应用的线程并发运行，并不会stop应用的线程。在并发运行的过程中，一些对象可能会发生变化，但是这种情况发生时。JVM
 将会包含这个对象的区域（Card）标记为Dirty, 这也就是Card Marking.
   * 在pre-clean 阶段，哪些能够从Dirty 对象到达的对象也会被标记，这个标记做完后，dirty card 标记就会被清除了。
-  
+  ![avatar](../../images/jvm/gc/cms_setup_3.png)
+
 * Phase 4: Concurrent Abortable Preclean （并发预先可能失败的清理）
   * 这也是一个并发阶段，但是同样不会影响用户的应用线程，这个阶段是为了尽量承担 STW （stop-the-world）中最终标记阶段的工作。这个阶段
   持续时间依赖于很多的因素，由于这个阶段是在重复做很多相同的工作，直接满足一些条件（比如：重复迭代的次数、完成的工作量或者时钟时间等）。
