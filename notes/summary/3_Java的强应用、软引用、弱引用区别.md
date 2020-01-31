@@ -116,6 +116,18 @@ class VeryBigWeakReference extends WeakReference<VeryBig> {
     }
 }
 ```
+* 输出结果
+```
+Just created weak: cn.edu.cqvie.gc.VeryBigWeakReference@5451c3a8
+Just created weak: cn.edu.cqvie.gc.VeryBigWeakReference@2626b418
+Just created weak: cn.edu.cqvie.gc.VeryBigWeakReference@5a07e868
+Finalizing VeryBig Weak 2
+Finalizing VeryBig Weak 1
+Finalizing VeryBig Weak 0
+In queue:Weak 0
+In queue:Weak 1
+In queue:Weak 2
+```
 
 ### 虚引用
 * 虚引用称为幽灵引用或幻影引用。它是最弱的引用关系，一个独享是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来获取对象
