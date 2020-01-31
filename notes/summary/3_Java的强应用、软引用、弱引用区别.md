@@ -47,7 +47,12 @@ public void clear() {
 
 * 示例
 ```java
-import java.lang.ref.Reference;import java.lang.ref.ReferenceQueue;import java.lang.ref.WeakReference;import java.util.LinkedList;
+import java.lang.ref.Reference;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
+import java.util.LinkedList;
+
+
 public class ReferenceTest {
     private static ReferenceQueue<VeryBig> rq = new ReferenceQueue<>();
     
