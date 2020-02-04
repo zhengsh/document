@@ -18,7 +18,7 @@
 
 # Spring Boot 入门实践
 
-* ** Spring Boot** 启动过程
+* **Spring Boot** 启动过程
 
 # 问题总结
 
