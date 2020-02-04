@@ -6,7 +6,8 @@
 
 # Java 虚拟机
 
-* **📔&nbsp;&nbsp;JVM 类加载器**
+
+* [**📔&nbsp;&nbsp;JVM 类加载器**](https://github.com/zhengsh/document/tree/master/notes/jvm/1_JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8 "类加载器")
 
 * **📕&nbsp;&nbsp;JVM 字节码**
 
