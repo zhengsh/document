@@ -72,3 +72,12 @@ public class MyApplication {
 2020-02-04 21:45:28.720  WARN 29298 --- [           main] cn.edu.cqvie.MyApplication               : Warn Message
 2020-02-04 21:45:28.720 ERROR 29298 --- [           main] cn.edu.cqvie.MyApplication               : Error Message
 ```
+
+* 在 YML 配置中设置日志输出到文件和根日志级别
+```yaml
+logging:
+  level:
+    root: debug
+  file:
+    path: log/mylog
+```
