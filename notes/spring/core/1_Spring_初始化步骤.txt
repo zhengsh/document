@@ -1,5 +1,5 @@
 Spring 初始化步骤
-即Spring 容器的refresh()方法完成容器的创建和刷新
+即Spring 容器的ApplicationContext类的refresh()方法完成容器的创建和刷新
 
 1、prepareRefresh() 刷新前的预处理；
   1）、initPropertySources(); 初始化一些属性设置
