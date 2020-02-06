@@ -40,4 +40,28 @@ log.retention.hours=168 就表示7天后会删除老的 segment 文件。
 日期的日志 rolling 或是基于事件的日志保留策略等情况下也会使用。实际上，该文件是在Kafka 新版本中才增加的，老版本Kafka 没有该文件的。
 它堆 *.index 文件的有益补充。*.index 文件是基于偏移量的索引嗯呢建，而*.timeindex 则是基于时间戳的索引文件。
 
-* leader-epoch-checkpoint: 是leader 的缓存文件，实际上，它是与Kafka 的HW（High Water）与LEO（Log End Offset）相关的重要文件。 
+* leader-epoch-checkpoint: 是leader 的缓存文件，实际上，它是与Kafka 的HW（High Water）与LEO（Log End Offset）相关的重要文件。
+
+### 分区和主题
+* 分区： 每个主题可以划分多个分区（每个主题都至少会有一个分区，在之前的实例中，我们创建主题时所使用的桉树 --partitions 即表示所创建的主题的
+分区数），当时指定值为1 ）在同一主题下的不同分区包含的消息是不同的。每个消息都被添加到分区中是，都会被添加一个偏移量（offset）, 它是消息在所在
+分区中唯一的编号，Kafka 是通过offset 来确保消息在一个分区内的顺序。offset 的顺序性。并不跨越分区，这意味着Kafka只会确保在同一个分区内的消息是有序
+的，但是同一个主题的多个分区内的消息，Kafka 并不会保证其顺序性。
+![avatar](../../../images/spring-boot/kafka_log_anatomy.png) 
+
+* 从上图可以看到， 消息在每个分区中是严格有序的 ，而不同分区之间的消息顺序则是不保证顺序
+
+* 基于这样的设计策略，Kafka 的性能并不会随着分区中消息的增多而产损耗， 因此存储较长时间的数据也不会导致什么问题.
+
+* Kafka 的消息记录是保存在磁盘上的，通过为每个消息分配一个offset , 即可以很好的确保同一分区中消息的顺序性，另外。
+Kafka 中的消息在磁盘上是有一定的保存时间的，在这个时间内，消息会存储在磁盘；当过了这个时间，消息会被丢掉，从而释放
+磁盘空间。该参数位于 server.properties 默认为：log.retention.hours=168。 即消息默认会保留7天；当然，你可以根据实际情况来自由修改时间，
+修改后重启 Kafka Server 即可生效。
+
+* 分区与主题的关系
+![avatar](../../../images/spring-boot/kafka_log_consumer.png)
+
+* 可以看到，每个消息在同一个分区中都有唯一的一个偏移量 （offset）
+
+* 分区是Kafka 实现高吞吐量的一个重要手段，特别是在 Kafka 集群环境下，一个主题的消息会分布在不同的 Kafka Server 上
+实现了分布式的消息存储，特别是搭配在Kafka 的副本的配置效果更佳。
