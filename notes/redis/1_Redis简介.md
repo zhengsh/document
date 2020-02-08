@@ -5,13 +5,18 @@
 stored sets with range queries(有序集合), bitmaps(位图), hyperloglogs（超级日志）, geospatial indexes with radius 
 queries and streams(具有半径查询和流的地理空间索引)。Redis 具有内置的复制，Lua 脚本, LRU 缓存， 事务和不同级别的磁盘持久性，
 并通过 Redis Sentinel 和 Redis Cluster 自动分区提供高可用性。 主要作用是用来做数据缓存，将热点数据存储在Redis中可以减少业务流量
-对底层数据的访问压力，获得更高的并发和更快的请求响应速度。
-
-### 
+对底层数据的访问压力，获得更高的并发和更快的请求响应速度。 
 
 ### Redis 的 LRU 缓存策略
+* 将Redis用作缓存时，当你新增数据的时候， 让它自动回收旧数据是一件很方便的事情。此行为在开发人员社区中是众所周知的，因为它是流行的内存
+缓存系统的默认行为。
+* LRU(Least Recent Used)是 Redis 唯一支持的回收方法，Redis 的 maxmemory 指令用于将可用内存限制成一个固定大小，还包括Redis 使用的
+LRU 算法，这个实际上知识一个近似值。
+* 从 Reids 4.0 开始, 引入了新的 LFU （最不常用）的回收策略。
 
+* 近似 LRU
 
+* 新的 LFU
 
 
 ### 名词解释
