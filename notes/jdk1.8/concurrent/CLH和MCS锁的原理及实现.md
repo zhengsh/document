@@ -1,36 +1,36 @@
-## CLH��MCS����ԭ����ʵ��
+## CLH、MCS锁的原理及实现
 
-### ����
+### 背景
 * SMP (Symmetric Multi-Processor)
 
- �Գƶദ�����ṹ�� ��������ڷǶԳƶ�����������Եġ�Ӧ��ʮ�ֹ㷺�Ĳ��м����������ּܹ��У�һ�������ɶ��CPU��ɣ��������ڴ��������Դ��
-���е�CPU������ƽ�ȵķ����ڴ棬I/O���ⲿ�жϡ���Ȼͬʱʹ�ö��CPU�����Ǵӹ����ĽǶ����������ǵı��־���һ̨����һ��������ϵͳ������жԳ�
-�ķֲ��ڶ��CPU�ϣ��Ӷ���������������ϵͳ�����ݴ�����������������CPU���������ӣ�ÿһ��CPU����Ҫ������ͬ���ڴ���Դ�������ڴ���ܻ��Ϊϵͳ
-ƿ��������CPU��Դ�˷ѡ�
+ 对称多处理器结构， 它是相对于非对称多出力技术而言的、应用十分广泛的并行技术。在这种架构中，一天计算机由多个CPU组成，并共享内存和其他资源，
+所有的CPU都可以平等的访问内存，I/O和外部中断。虽然同时使用多个CPU，但是从管理的角度来看，他们的表现就像一台单机一样。操作系统任务队列对称
+的分布在多个CPU上，从而极大的提高了整个系统的数据处理能力。但是随着CPU数量的增加，每一个CPU都需要访问相同的内存资源，共享内存可能会成为系统
+瓶颈，导致CPU资源浪费。
 
 * NUMA (Non-Uniform Memory Access)
 
- ��һ�´���ʣ���CPU��ΪCPUģ�飬ÿ��CPUģ���ж��CPU��ɣ����Ҿ��ж����ı����ڴ桢I/O�۵ȣ�ģ��֮�����ͨ������ģ���໥���ʣ����ʱ����ڴ�
- ������CPUģ����ڴ棩���ٶ�ԶԶ���ڷ���Զ���ڴ棨������CPUģ����ڴ棩���ٶȣ���Ҳ�Ƿ�һ�´洢���ʵ����ɡ�NUMA�Ϻõؽ��SMP����չ���⣬��CPU
- ���ӵ�ʱ����Ϊ����Զ���ڴ��ӳ�ԶԶ���ڱ����ڴ棬����ϵͳ���ܲ����������ӡ�
+ 非一致存访问，将CPU分为CPU模块，每个CPU模块有多个CPU组成，并且具有独立的本地内存、I/O槽等，模块之间可以通过互联模块相互访问，访问本地内存
+ （本地CPU模块的内存）的速度远远高于访问远程内存（其他的CPU模块的内存）的速度，这也是非一致存储访问的来由。NUMA较好地解决SMP的拓展问题，当CPU
+ 增加的时候，因为访问远程内存延迟远远大于本地内存，所以系统性能不能线性增加。
 
 
-### CLH ��
-  CLH ��Craig��Landin and Hagersten����һ�ֻ��ڵ��������ĸ����ܡ���ƽ��������������������߳�ͨ��ǰ���ڵ�ı���������������ǰ�ýڵ������
-��ǰ�ڵ����������������м�������SMP�ܹ��£�CLH���������ơ���NUMA�ܹ��£����ɵ�ǰ�ڵ���ǰ���ڵ��ڲ�ͬ��CPUģ���£���CPUģ����������Ŀ�����
-��MCS����������NUMA�ܹ�
+### CLH 锁
+  CLH （Craig，Landin and Hagersten）是一种基于单向链表的高性能、公平的自旋锁。申请加锁的线程通过前驱节点的变量进行自旋。在前置节点解锁后，
+当前节点会结束自旋，并进行加锁。在SMP架构下，CLH更具有优势。在NUMA架构下，若干当前节点与前驱节点在不同的CPU模块下，跨CPU模块会带来额外的开销，
+而MCS锁更适用于NUMA架构
 
-�������̣�
-1. ��ȡ��ǰ�²�����ڵ㣬���Ϊ�գ����г�ʼ����
-2. ����������ȡ������β�ڵ㣬������ǰ�ڵ�����Ϊβ�ڵ㣬��ʱԭ���Ľڵ�Ϊ��ǰ�ڵ��ǰ�ýڵ㡣
-3. ���β�ڵ�Ϊ�գ���ʾ��ǰ�ڵ��ǵ�һ���ڵ㡣ֱ�Ӽ����ɹ���
-4. ���β�ڵ㲻Ϊ�գ������ǰ�ýڵ����ֵ��locked == true�� ����������֪��ǰ�ýڵ������Ϊfalse��
+加锁过程：
+1. 获取当前下层的锁节点，如果为空，进行初始化。
+2. 永不方法获取链表的尾节点，并将当前节点设置为尾节点，此时原来的节点为当前节点的前置节点。
+3. 如果尾节点为空，表示当前节点是第一个节点。直接加锁成功。
+4. 如果尾节点不为空，则基于前置节点的锁值（locked == true） 进行自旋，知道前置节点的锁变为false。
 
-�������̣�
-1. ��ȡ��ǰ�̶߳�Ӧ���Ľڵ㣬����ڵ�Ϊ�ջ���Ϊfalse�������������ֱ�ӷ���
-2. ͬ������Ϊβ�ڵ㸳��ֵ�����Ʋ��ɹ���ʾ��ǰ�ڵ㲻��β�ڵ㣬����Ҫ����ǰ�ڵ��locked = false�����ڵ㡣�����ǰ�ڵ���β�ڵ㣬������Ϊ�ýڵ����á�
+解锁过程：
+1. 获取当前线程对应锁的节点，如果节点为空或者为false，则无需解锁，直接返回
+2. 同步方法为尾节点赋空值，复制不成功表示当前节点不是尾节点，则需要将当前节点的locked = false解锁节点。如果当前节点是尾节点，则无需为该节点设置。
 
-Demo ���£�
+Demo 如下：
 ```java
 public class CLHLock {
 
@@ -93,16 +93,16 @@ public class CLHLock {
 }
 ```
 
-### MCS ��
-  MSC (John Mellor-Crummey and Michael Scott)��CLH���Ĳ�ͬ��������������ʽ������ʽ�������߳���ѡ�Ĺ���ͬ��CLH����ǰ���ڵ��locked
-��������ת�ȴ�����MCS���Լ��Ľڵ���locked������ѡ�ȴ���������ˣ��������CLH��NUMAϵͳ�ܹ��л�ȡlocked��״̬�ڴ��Զ�����⡣
+### MCS 锁
+  MSC (John Mellor-Crummey and Michael Scott)与CLH最大的不同并不是链表是隐式还是显式，而是线程自选的规则不同：CLH是在前驱节点额locked
+域上自旋转等待，而MCS在自己的节点上locked域上自选等待。正是如此，它解决了CLH在NUMA系统架构中获取locked域状态内存过远的问题。
 
-MCS������ʵ�ֹ���
-1. ���г�ʼ��û�нڵ㣬taIl = null
-2. �߳�A��Ҫ��ȡ�������Լ����ڶ�β����������һ���ڵ㣬����locaked��Ϊfalse
-3. �߳�B���߳�C��̼�����У�a -> next = b, b -> next = c, B ��Cû�л�ȡ���������ڵȴ�״̬������locked��Ϊtrue�� βָ��ָ���߳�C��Ӧ�Ľڵ㡣
-4. �߳�A�ͷ�����˳������nextָ���ҵ����߳�B������B��locked ������Ϊfalse ,��һ�����ᴥ���߳�B��ȡ����
-Demo ���£�
+MCS锁具体实现规则：
+1. 队列初始化没有节点，taIl = null
+2. 线程A想要获取锁，将自己置于队尾，由于它是一个节点，他的locaked域为false
+3. 线程B和线程C相继加入队列，a -> next = b, b -> next = c, B 和C没有获取到锁，处于等待状态，所以locked域为true， 尾指针指向线程C对应的节点。
+4. 线程A释放锁后，顺着它的next指正找到了线程B，并把B的locked 域设置为false ,这一动作会触发线程B获取锁。
+Demo 如下：
 ```java
 public class MCSLock {
 

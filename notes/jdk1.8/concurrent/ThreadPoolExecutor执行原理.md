@@ -1,9 +1,9 @@
-### ThreadPoolExecutorÖ´ĞĞÔ­Àí 
+### ThreadPoolExecutoræ‰§è¡ŒåŸç† 
 
 
-#### execute ·½·¨
+#### execute æ–¹æ³•
  
- ·ÖÎöThreadPoolExecutorµÄÖ´ĞĞÔ­Àí£¬ Ö±½Ó´Óexecute ·½·¨¿ªÊ¼¡£
+ åˆ†æThreadPoolExecutorçš„æ‰§è¡ŒåŸç†ï¼Œ ç›´æ¥ä»execute æ–¹æ³•å¼€å§‹ã€‚
  
 ```
 public void execute(Runnbale command) {
@@ -13,7 +13,7 @@ public void execute(Runnbale command) {
     
     int c = ctl.get();
     
-    //1.¹¤×÷Ïß³Ì < ºËĞÄÏß³Ì
+    //1.å·¥ä½œçº¿ç¨‹ < æ ¸å¿ƒçº¿ç¨‹
     if (workerCountOf(c) < corePoolSize) {
         if (andWork(command, true)) {
             retrun;
@@ -21,7 +21,7 @@ public void execute(Runnbale command) {
         c = ctl.get();
     }
     
-    //2¡¢ÔËĞĞÌ¬£¬ ²¢³¢ÊÔ½«ÈÎÎñ¼ÓÈë¶ÓÁĞ
+    //2ã€è¿è¡Œæ€ï¼Œ å¹¶å°è¯•å°†ä»»åŠ¡åŠ å…¥é˜Ÿåˆ—
     if (isRunning(c) && workQueue.offer(command)) {
         int recheck = ctl.get();
         if (! isRunning(recheck) && remove(command)) {
@@ -30,52 +30,52 @@ public void execute(Runnbale command) {
             andWorker(null, false);
         }
     } 
-    // 3¡¢Ê¹ÓÃ³¢ÊÔÊ¹ÓÃ×î´óÏß³ÌÔËĞĞ
+    // 3ã€ä½¿ç”¨å°è¯•ä½¿ç”¨æœ€å¤§çº¿ç¨‹è¿è¡Œ
     else if (!addWorker(command, flase)) {
         reject(command);
     }
 }
 ```
 
-ÔÚÖ´ĞĞexecute() ·½·¨Ê±Èç¹û×´Ì¬Ò»Ö±ÊÇRUNNINGÊ±£¬ µÄÖ´ĞĞ¹ı³ÌÈçÏÂ£º
+åœ¨æ‰§è¡Œexecute() æ–¹æ³•æ—¶å¦‚æœçŠ¶æ€ä¸€ç›´æ˜¯RUNNINGæ—¶ï¼Œ çš„æ‰§è¡Œè¿‡ç¨‹å¦‚ä¸‹ï¼š
 
-1. Èç¹û workerCount < corePoolSize, Ôò´´½¨²¢Æô¶¯Ò»¸öÏÂ³ÇÀ´Ö´ĞĞĞÂÌá½»µÄÈÎÎñ;
-2. Èç¹û workerCount >= corePoolSize, ÇÒÏß³Ì³ØÄÚµÄ×èÈû¶ÓÁĞÎ´Âú, Ôò½«ÈÎÎñÌí¼Óµ½¸Ã×èÈû¶ÓÁĞÖĞ;
-3. Èç¹û workerCount >= corePoolSize && workerCount < maximumPoolSize, ÇÒÏß³Ì³ØÄÚµÄ×èÈû¶ÓÁĞÒÑÂú, Ôò´´½¨²¢ÇĞ¶¯Ò»¸öÏß³ÌÀ´Ö´ĞĞĞÂÌá½»µÄÈÎÎñ¡£
-4. Èç¹û workerCount >= maximumPoolSize, ²¢ÇÒÏß³Ì³ØµÄ×èÈû¶ÓÁĞÒÑÂú£¬ Ôò¸ù¾İ¾Ü¾ø²ßÂÔÀ´´¦ÀíÈÎÎñ£¬Ä¬ÈÏµÄ´¦Àí·½Ê½ÊÇÖ±½ÓÅ×³öÒì³£¡£
+1. å¦‚æœ workerCount < corePoolSize, åˆ™åˆ›å»ºå¹¶å¯åŠ¨ä¸€ä¸ªä¸‹åŸæ¥æ‰§è¡Œæ–°æäº¤çš„ä»»åŠ¡;
+2. å¦‚æœ workerCount >= corePoolSize, ä¸”çº¿ç¨‹æ± å†…çš„é˜»å¡é˜Ÿåˆ—æœªæ»¡, åˆ™å°†ä»»åŠ¡æ·»åŠ åˆ°è¯¥é˜»å¡é˜Ÿåˆ—ä¸­;
+3. å¦‚æœ workerCount >= corePoolSize && workerCount < maximumPoolSize, ä¸”çº¿ç¨‹æ± å†…çš„é˜»å¡é˜Ÿåˆ—å·²æ»¡, åˆ™åˆ›å»ºå¹¶åˆ‡åŠ¨ä¸€ä¸ªçº¿ç¨‹æ¥æ‰§è¡Œæ–°æäº¤çš„ä»»åŠ¡ã€‚
+4. å¦‚æœ workerCount >= maximumPoolSize, å¹¶ä¸”çº¿ç¨‹æ± çš„é˜»å¡é˜Ÿåˆ—å·²æ»¡ï¼Œ åˆ™æ ¹æ®æ‹’ç»ç­–ç•¥æ¥å¤„ç†ä»»åŠ¡ï¼Œé»˜è®¤çš„å¤„ç†æ–¹å¼æ˜¯ç›´æ¥æŠ›å‡ºå¼‚å¸¸ã€‚
 
-×¢Òâ£º andWorker(null, false); Ò²ÊÇ´´½¨Ò»¸öÏß³Ì, µ«²¢Ã»ÓĞ´«ÈëÈÎÎñ, ÒòÎªÈÎÎñÒÑ¾­±»Ìí¼Óµ½ÁËworkerQueueÖĞÁË£¬ËùÒÔworkerÔÚÖ´ĞĞµÄÊ±ºò£¬
-»áÖ±½Ó´ÓworkQueue ÖĞ»ñÈ¡ÈÎÎñ¡£ËùÒÔ£¬ÔÚworkerCountOf(recheck) == 0 Ê±Ö´ĞĞandWorker(null); Ò²ÊÇÎªÁË±£Ö¤ÏØ³Ç´ÎÔÚRUNNING ×´Ì¬ÏÂ±ØĞëÒªÓĞÒ»¸öÏß³ÌÁËÖ´ĞĞÈÎÎñ¡£
+æ³¨æ„ï¼š andWorker(null, false); ä¹Ÿæ˜¯åˆ›å»ºä¸€ä¸ªçº¿ç¨‹, ä½†å¹¶æ²¡æœ‰ä¼ å…¥ä»»åŠ¡, å› ä¸ºä»»åŠ¡å·²ç»è¢«æ·»åŠ åˆ°äº†workerQueueä¸­äº†ï¼Œæ‰€ä»¥workeråœ¨æ‰§è¡Œçš„æ—¶å€™ï¼Œ
+ä¼šç›´æ¥ä»workQueue ä¸­è·å–ä»»åŠ¡ã€‚æ‰€ä»¥ï¼Œåœ¨workerCountOf(recheck) == 0 æ—¶æ‰§è¡ŒandWorker(null); ä¹Ÿæ˜¯ä¸ºäº†ä¿è¯å¿åŸæ¬¡åœ¨RUNNING çŠ¶æ€ä¸‹å¿…é¡»è¦æœ‰ä¸€ä¸ªçº¿ç¨‹äº†æ‰§è¡Œä»»åŠ¡ã€‚
 
-ÕûÌåÅĞ¶ÏÁ÷³öÈçÏÂÍ¼ËùÊ¾
+æ•´ä½“åˆ¤æ–­æµå‡ºå¦‚ä¸‹å›¾æ‰€ç¤º
 
 ![avatar](images/jdk/concurrent/1.png)
  
-#### addWorker ·½·¨
+#### addWorker æ–¹æ³•
 
-ÔÚexecute ·½·¨ÖĞ£¬ÓÃµ½ÁË double-check µÄË¼Ïë£¬ ÎÒÃÇ¿´µ½ÉÏÊö´úÂë²¢Ã»ÓĞÍ¬²½¿ØÖÆ¶¼ÊÇ»ùÓÚ
-ÀÖ¹ÛËøµÄcheck , Èç¹ûÈÎÎñ¿ÉÒÔ´´½¨Ôò½øÈëandWorker(Runnable firestTask, boolean core) ·½·¨£¬×¢ÒâÉÏÊö´úÂëÖĞµÄÈıÖÖ·½Ê½£º
+åœ¨execute æ–¹æ³•ä¸­ï¼Œç”¨åˆ°äº† double-check çš„æ€æƒ³ï¼Œ æˆ‘ä»¬çœ‹åˆ°ä¸Šè¿°ä»£ç å¹¶æ²¡æœ‰åŒæ­¥æ§åˆ¶éƒ½æ˜¯åŸºäº
+ä¹è§‚é”çš„check , å¦‚æœä»»åŠ¡å¯ä»¥åˆ›å»ºåˆ™è¿›å…¥andWorker(Runnable firestTask, boolean core) æ–¹æ³•ï¼Œæ³¨æ„ä¸Šè¿°ä»£ç ä¸­çš„ä¸‰ç§æ–¹å¼ï¼š
   
-  * andWorker(command, true): ´´½¨ºËĞÄÏß³ÌÖ´ĞĞÈÎÎñ
-  * andWorker(command, false): ´´½¨·ÇºËĞÄÏß³ÌÈÎÎñ
-  * andWorker(null, false): ´´½¨·ÇºËĞÄÏß³Ì£¬µ±Ç°ÈÎÎñÎª¿Õ
+  * andWorker(command, true): åˆ›å»ºæ ¸å¿ƒçº¿ç¨‹æ‰§è¡Œä»»åŠ¡
+  * andWorker(command, false): åˆ›å»ºéæ ¸å¿ƒçº¿ç¨‹ä»»åŠ¡
+  * andWorker(null, false): åˆ›å»ºéæ ¸å¿ƒçº¿ç¨‹ï¼Œå½“å‰ä»»åŠ¡ä¸ºç©º
   
-andWorker µÄ·µ»ØÖµÊÇ boolean, ²»±£Ö¤²Ù×÷³É¹¦£¬ÏÂÃæ¾ßÌåÊ±¼ä andWorker ·½·¨ÈçÏÂ:
+andWorker çš„è¿”å›å€¼æ˜¯ boolean, ä¸ä¿è¯æ“ä½œæˆåŠŸï¼Œä¸‹é¢å…·ä½“æ—¶é—´ andWorker æ–¹æ³•å¦‚ä¸‹:
    
 ```
 
 private boolean andWorker(Runable firestTask, boolean core) {
     retry:
-    //ÓÉÓÚÏß³ÌÖ´ĞĞ¹ı³ÌÖĞ£¬¸÷ÖÖÇé¿ö¶¼¿ÉÄÜ´¦ÓÚ£¬Í¨¹ı×ÔĞıµÄ·½Ê½À´±£Ö¤workerµÄÔö¼Ó
+    //ç”±äºçº¿ç¨‹æ‰§è¡Œè¿‡ç¨‹ä¸­ï¼Œå„ç§æƒ…å†µéƒ½å¯èƒ½å¤„äºï¼Œé€šè¿‡è‡ªæ—‹çš„æ–¹å¼æ¥ä¿è¯workerçš„å¢åŠ 
     for (;;) {
         int c = ctl.get();
-        //»ñÈ¡Ïß³ÌÔËĞĞ×´Ì¬
+        //è·å–çº¿ç¨‹è¿è¡ŒçŠ¶æ€
         int rs = runStateOf(c);
         
-        //Èç¹û rs >= SHUTDOWN, Ôò±íÊ¾´ËÊ±²»ÔÙ½ÓÊÜĞÂÈÎÎñ
-        //½ÓÏÂÀ´Èı¸öÌõ¼ş Í¨¹ı && Á´½Ó£¬Ö»ÒªÒ»¸ö²»Âú×ã¾Í·µ»Øfalse;
-        //1. rs == SHUTDOWN, ±íÊ¾¹Ø±Õ×´Ì¬£¬²»ÔÙ½ÓÊÜÌá½»µÄÈÎÎñ£¬µ«È´¿ÉÒÔ¼ÌĞø´¦Àí×èÈû¶ÓÁĞÖĞÒÑ¾­´æÔÚµÄÈÎÎñ;
-        //2. firstTask Îª¿Õ
+        //å¦‚æœ rs >= SHUTDOWN, åˆ™è¡¨ç¤ºæ­¤æ—¶ä¸å†æ¥å—æ–°ä»»åŠ¡
+        //æ¥ä¸‹æ¥ä¸‰ä¸ªæ¡ä»¶ é€šè¿‡ && é“¾æ¥ï¼Œåªè¦ä¸€ä¸ªä¸æ»¡è¶³å°±è¿”å›false;
+        //1. rs == SHUTDOWN, è¡¨ç¤ºå…³é—­çŠ¶æ€ï¼Œä¸å†æ¥å—æäº¤çš„ä»»åŠ¡ï¼Œä½†å´å¯ä»¥ç»§ç»­å¤„ç†é˜»å¡é˜Ÿåˆ—ä¸­å·²ç»å­˜åœ¨çš„ä»»åŠ¡;
+        //2. firstTask ä¸ºç©º
         //3. Check is queue empty only if necessary.
         if (rs > SHUTDOWN &&
             !(rs == SHUTDOWN && firstTask == null && !workQueue.isEmpty())
@@ -84,24 +84,24 @@ private boolean andWorker(Runable firestTask, boolean core) {
         }
         
        for (;;) {
-            //»ñÈ¡Ïß³Ì³ØÖĞÏß³ÌÊı
+            //è·å–çº¿ç¨‹æ± ä¸­çº¿ç¨‹æ•°
            int wc = workCountOf(c);
            
-           //Èç¹ûÏß³ÌÊı >= CAPACITY, Ò²¾ÍÊÇctl µÄµÍ29Î»µÄ×î´óÖµ£¬Ôò·µ»Øfalse;
-           //ÕâÀïcoreÀ´ÅĞ¶Ï ÏŞÖÆÏß³ÌÊıÁ¿µÄÉÏÏŞÊÇcorePoolSize»¹ÊÇmaximumPoolSize;
-           //Èç¹ûcoreÊÇtrue±íÊ¾¸ù¾İcorePoolSizeÀ´±È½Ï
-           //Èç¹ûcoreÊÇfalse±íÊ¾¸ù¾İmaximumPoolSizeÀ´±È½Ï
+           //å¦‚æœçº¿ç¨‹æ•° >= CAPACITY, ä¹Ÿå°±æ˜¯ctl çš„ä½29ä½çš„æœ€å¤§å€¼ï¼Œåˆ™è¿”å›false;
+           //è¿™é‡Œcoreæ¥åˆ¤æ–­ é™åˆ¶çº¿ç¨‹æ•°é‡çš„ä¸Šé™æ˜¯corePoolSizeè¿˜æ˜¯maximumPoolSize;
+           //å¦‚æœcoreæ˜¯trueè¡¨ç¤ºæ ¹æ®corePoolSizeæ¥æ¯”è¾ƒ
+           //å¦‚æœcoreæ˜¯falseè¡¨ç¤ºæ ¹æ®maximumPoolSizeæ¥æ¯”è¾ƒ
            if (wc >= CAPACITY || 
                wc >= (core ? corePoolSize : maximumPoolSize)) {
                return false;
            }
-           //Í¨¹ıCASÔ­×ÓµÄ·½Ê½À´Ôö¼ÓÏß³ÌÊıÁ¿£¬
-           //Èç¹û³É¹¦ÔòÌø³öµÚÒ»¸öforÑ­»·;
+           //é€šè¿‡CASåŸå­çš„æ–¹å¼æ¥å¢åŠ çº¿ç¨‹æ•°é‡ï¼Œ
+           //å¦‚æœæˆåŠŸåˆ™è·³å‡ºç¬¬ä¸€ä¸ªforå¾ªç¯;
            if (compareAndIncrementWorkCount(c)) {
                break retry;
            }
            c = ctl.get();
-           //Èç¹ûµ±Ç×ÔËĞĞµÄ×´Ì¬²»µÈÓÚrs, ÔòËµÃ÷Ïß³Ì³ØµÄ×´Ì¬ÒÑ¾­¸Ä±äÁË£¬Ôò·µ»ØµÚÒ»¸öforÑ­»·¼ÌĞøÖ´ĞĞ
+           //å¦‚æœå½“äº²è¿è¡Œçš„çŠ¶æ€ä¸ç­‰äºrs, åˆ™è¯´æ˜çº¿ç¨‹æ± çš„çŠ¶æ€å·²ç»æ”¹å˜äº†ï¼Œåˆ™è¿”å›ç¬¬ä¸€ä¸ªforå¾ªç¯ç»§ç»­æ‰§è¡Œ
            if (runStateOf(c) != rs) {
                countinue retry;
            }
@@ -109,35 +109,35 @@ private boolean andWorker(Runable firestTask, boolean core) {
        }
     }
     
-    // µÚ¶ş²¿·Ö£º´´½¨worker, Õâ²¿·ÖÊ¹ÓÃReentrantLock Ëø
-    boolean workerStated = false; // Ïß³ÌÆô¶¯±êÊ¶Î»
-    boolean workerAdded = false; // Ïß³ÌÊÇ·ñ¼üÈëworkers ±êÖ¾Î»
+    // ç¬¬äºŒéƒ¨åˆ†ï¼šåˆ›å»ºworker, è¿™éƒ¨åˆ†ä½¿ç”¨ReentrantLock é”
+    boolean workerStated = false; // çº¿ç¨‹å¯åŠ¨æ ‡è¯†ä½
+    boolean workerAdded = false; // çº¿ç¨‹æ˜¯å¦é”®å…¥workers æ ‡å¿—ä½
     Worker w = null;
     try {
-        //¸ù¾İfirstTask´´½¨worker
+        //æ ¹æ®firstTaskåˆ›å»ºworker
         w = new Worker(firstTask);
-        //Ã¿Ò»¸öWorker¶ÔÏó»á´´½¨Ò»¸öÏß³Ì
+        //æ¯ä¸€ä¸ªWorkerå¯¹è±¡ä¼šåˆ›å»ºä¸€ä¸ªçº¿ç¨‹
         final Thread t = w.thread;
         if (t != null) {
-            //´´½¨¿ÉÖØÈëËø
+            //åˆ›å»ºå¯é‡å…¥é”
             final ReentrantLock mainLock = this.mainLock;
             mainLock.lock();
             try {
-                //»ñÈ¡Ïß³Ì³ØµÄ×´Ì¬
+                //è·å–çº¿ç¨‹æ± çš„çŠ¶æ€
                 int rs = runStateOf(ctl.get());
                 
-                //Ïß³Ì³ØµÄ×´Ì¬Ğ¡ÓÚ SHUTDOWN, ±íÊ¾Ïß³Ì³Ø´¦ÓÚRUNNING×´Ì¬
-                //Èç¹ûrs ÊÇRUNNING×´Ì¬»òrs ÊÇSHUTDOWN×´Ì¬²¢ÇÒfirstTaskÎªnull, ÏòÏß³Ì³ØÖĞÌí¼ÓÏß³Ì
-                //ÒòÎªÔÙSHUTDOWN×´Ì¬Ê±²»»áÔÙÌí¼ÓĞÂµÄÈÎÎñ£¬ µ«ÊÇ»¹ÊÇ´¦ÀíworkerQueueÖĞµÄÈÎÎñ
+                //çº¿ç¨‹æ± çš„çŠ¶æ€å°äº SHUTDOWN, è¡¨ç¤ºçº¿ç¨‹æ± å¤„äºRUNNINGçŠ¶æ€
+                //å¦‚æœrs æ˜¯RUNNINGçŠ¶æ€æˆ–rs æ˜¯SHUTDOWNçŠ¶æ€å¹¶ä¸”firstTaskä¸ºnull, å‘çº¿ç¨‹æ± ä¸­æ·»åŠ çº¿ç¨‹
+                //å› ä¸ºå†SHUTDOWNçŠ¶æ€æ—¶ä¸ä¼šå†æ·»åŠ æ–°çš„ä»»åŠ¡ï¼Œ ä½†æ˜¯è¿˜æ˜¯å¤„ç†workerQueueä¸­çš„ä»»åŠ¡
                 if(rs < SHUTDOWN || 
                  (rs == SHUTDOWN && firstTask == null)){
                     if (t.isAlive) {
                         throw new IllegalThreadStateException();
                     }
-                    //worker ÊÇÒ»¸öhashset
+                    //worker æ˜¯ä¸€ä¸ªhashset
                     worker.add(w);
                     int s = workers.size();
-                    //largestPoolSize¼ÇÂ¼Ïß³Ì³ØÖĞ³öÏÖµÄ×î´óµÄÏß³ÌÊıÁ¿
+                    //largestPoolSizeè®°å½•çº¿ç¨‹æ± ä¸­å‡ºç°çš„æœ€å¤§çš„çº¿ç¨‹æ•°é‡
                     if (s > largestPoolSize) {
                         largestPoolSize = s;
                     }
@@ -149,23 +149,23 @@ private boolean andWorker(Runable firestTask, boolean core) {
             }
             
             if (workerAdded) {
-                //Æô¶¯Ïß³Ì£¬Worker ÖĞÊµÏÖÁËrunning ·½·¨£¬´ËÊ±»áµ÷ÓÃWorkerµÄrun·½·¨¡£
+                //å¯åŠ¨çº¿ç¨‹ï¼ŒWorker ä¸­å®ç°äº†running æ–¹æ³•ï¼Œæ­¤æ—¶ä¼šè°ƒç”¨Workerçš„runæ–¹æ³•ã€‚
                 t.start(); 
                 workerStated = true;
             }
         }
     } finally {
         if (workerAdded) {
-            addWorkerFailed(w); // Ê§°Ü²Ù×÷
+            addWorkerFailed(w); // å¤±è´¥æ“ä½œ
         }
     }
     return workerStated;
 }
 ```
 
-#### WorkerÀà
-Ïß³Ì³ØÖĞÃ¿Ò»¸öÏß³Ì¶ÔÏó±»·â×°³ÉÁËÒ»¸öWorker¶ÔÏó£¬ ThreadPool Î¬»¤µÄ¾ÍÊÇÒ»×éWorker¶ÔÏó¡£WorkerÀà¼Ì³ĞÁËAQS£¬ ²¢ÊµÏÖÁËRunnable½Ó¿Ú¡£
-ÆäÖĞ°üº¬Á½¸öÖØÒªµÄÊôĞÔ; firstTask ÓÃÀ´±£´æ´«ÈëµÄÈÎÎñ, thread ÊÇÔÚµ÷ÓÃµÄ¹¹Ôì·½·¨ÊÇÍ¨¹ıThreadFactory À´´´½¨µÄÏß³Ì£¬ÊÇÓÃÀ´´¦ÀíÈÎÎñµÄÏß³Ì¡£
+#### Workerç±»
+çº¿ç¨‹æ± ä¸­æ¯ä¸€ä¸ªçº¿ç¨‹å¯¹è±¡è¢«å°è£…æˆäº†ä¸€ä¸ªWorkerå¯¹è±¡ï¼Œ ThreadPool ç»´æŠ¤çš„å°±æ˜¯ä¸€ç»„Workerå¯¹è±¡ã€‚Workerç±»ç»§æ‰¿äº†AQSï¼Œ å¹¶å®ç°äº†Runnableæ¥å£ã€‚
+å…¶ä¸­åŒ…å«ä¸¤ä¸ªé‡è¦çš„å±æ€§; firstTask ç”¨æ¥ä¿å­˜ä¼ å…¥çš„ä»»åŠ¡, thread æ˜¯åœ¨è°ƒç”¨çš„æ„é€ æ–¹æ³•æ˜¯é€šè¿‡ThreadFactory æ¥åˆ›å»ºçš„çº¿ç¨‹ï¼Œæ˜¯ç”¨æ¥å¤„ç†ä»»åŠ¡çš„çº¿ç¨‹ã€‚
 
 ```java
 private final class Worker
@@ -177,31 +177,31 @@ private final class Worker
     volatile long completedTasks;
     
     Worker (Runnable firstTask)  {
-        //°ÑstateÉèÖÃÎª-1£¬×èÖ¹ÖÕ¶ËÖªµÀµ÷ÓÃrunWorker·½·¨
-        //ÒòÎªAQSÄ¬ÈÏstateÊÇ0, Èç¹û¸Õ´´½¨Ò»¸öWorker¶ÔÏó£¬ »¹Ã»ÓĞÖ´ĞĞÈÎÎñÊ±£¬ÕâÊ±ºò²»Ó¦¸Ã±»ÖĞ¶Ï
+        //æŠŠstateè®¾ç½®ä¸º-1ï¼Œé˜»æ­¢ç»ˆç«¯çŸ¥é“è°ƒç”¨runWorkeræ–¹æ³•
+        //å› ä¸ºAQSé»˜è®¤stateæ˜¯0, å¦‚æœåˆšåˆ›å»ºä¸€ä¸ªWorkerå¯¹è±¡ï¼Œ è¿˜æ²¡æœ‰æ‰§è¡Œä»»åŠ¡æ—¶ï¼Œè¿™æ—¶å€™ä¸åº”è¯¥è¢«ä¸­æ–­
         setState(-1);
         this.firstTask = firstTask;
-        //´´½¨Ò»¸öÏß³Ì, newThread·½·¨´«ÈëµÄ²ÎÊıÊÇthis, ÒòÎªWorker±¾Éí¼Ì³ĞÁËRunnable½Ó¿Ú£¬ Ò²¾ÍÊÇÒ»¸öÏß³Ì;
-        //ËùÒÔWorker¶ÔÏóÔÚÆô¶¯µÄÊ±ºò»Úµ÷ÓÃWorker¶ÔÏóÖĞµÄrun·½·¨
+        //åˆ›å»ºä¸€ä¸ªçº¿ç¨‹, newThreadæ–¹æ³•ä¼ å…¥çš„å‚æ•°æ˜¯this, å› ä¸ºWorkeræœ¬èº«ç»§æ‰¿äº†Runnableæ¥å£ï¼Œ ä¹Ÿå°±æ˜¯ä¸€ä¸ªçº¿ç¨‹;
+        //æ‰€ä»¥Workerå¯¹è±¡åœ¨å¯åŠ¨çš„æ—¶å€™æ‚”è°ƒç”¨Workerå¯¹è±¡ä¸­çš„runæ–¹æ³•
         this.thread = getThreadFactory().newThread(this);
     }
 }
 ```
-Worker Àà¼Ì³ĞÁËAQS, Ê¹ÓÃAQSÀ´ÊµÏÖ¶ÀÕ¼Ëø¹¦µÄ¹¦ÄÜ£¬ ÎªÊ²Ã´²»Ê¹ÓÃ ReentranLock À´ÊµÏÖ£¿ ¿ÉÒÔ¿´³ötryAcquire·½·¨£¬ËûÊÇ²»ÔÊĞíÖØÈëµÄ£¬ ¶ø
-ReentrantLock ÊÇÔÊĞíÖØÈëµÄ¡£
-1. lock ·½·¨Ò»µ©»ñÈ¡¶ÀÕ¼Ëø£¬ ±íÊ¾µ±Ç°Ïß³ÌÕıÔÚÖ´ĞĞÈÎÎñÖĞ;
-2. Èç¹ûÖ´ĞĞÈÎÎñ£¬Ôò²»Ó¦¸ÃÖĞ¶ÏÏß³Ì;
-3. Èç¹û¸ÃÏß³ÌÏÖÔÚ²»ÊÇ¶ÀÕ¼ËøµÄ×´Ì¬£¬Ò²ÊÇ¿ÕÏĞ×´Ì¬£¬ËµÃ÷ËüÃ»ÓĞ´¦ÀíÈÎÎñ£¬ÕâÊ±¿ÉÒÔ¶Ô¸ÃÏß³Ì½øĞĞÖĞ¶Ï;
-4. Ïß³Ì³ØÖĞÖ´ĞĞshutdown ·½·¨»ò tryTerminate ·½·¨Ê±»áµ÷ÓÃ interruptldleWorkers ·½·¨À´ÖĞ¶Ï¿ÕÏĞÏß³Ì, interruptldleWorkers ·½·¨»áÊ¹ÓÃ
-tryLock·½·¨À´ÅĞ¶ÏÏß³Ì³ØÖĞµÄÏß³ÌÊÇ·ñÊÇ¿ÕÏĞ×´Ì¬¡£
-5. Ö®ËùÒÔÉèÖÃÎª²»¿ÉÖØÈëµÄ£¬ ÊÇÒòÎªÔÚÈÎÎñµ÷ÓÃsetCorePoolSize ÕâÀàÏß³Ì³Ø¿ØÖÆµÄ·½·¨Ê±£¬²»»áÖĞ¶ÏÕıÔÚÔËĞĞµÄÏß³ÌËùÒÔ£¬Worker ¼Ì³Ğ×ÔAQS£¬ÓÃÓÚÅĞ¶ÏÏß³Ì³Ø
-ÊÇ·ñ¿ÕÏĞÒÔ¼°ÊÇ·ñ´¦ÓÚ±»ÖĞ¶Ï¡£
+Worker ç±»ç»§æ‰¿äº†AQS, ä½¿ç”¨AQSæ¥å®ç°ç‹¬å é”åŠŸçš„åŠŸèƒ½ï¼Œ ä¸ºä»€ä¹ˆä¸ä½¿ç”¨ ReentranLock æ¥å®ç°ï¼Ÿ å¯ä»¥çœ‹å‡ºtryAcquireæ–¹æ³•ï¼Œä»–æ˜¯ä¸å…è®¸é‡å…¥çš„ï¼Œ è€Œ
+ReentrantLock æ˜¯å…è®¸é‡å…¥çš„ã€‚
+1. lock æ–¹æ³•ä¸€æ—¦è·å–ç‹¬å é”ï¼Œ è¡¨ç¤ºå½“å‰çº¿ç¨‹æ­£åœ¨æ‰§è¡Œä»»åŠ¡ä¸­;
+2. å¦‚æœæ‰§è¡Œä»»åŠ¡ï¼Œåˆ™ä¸åº”è¯¥ä¸­æ–­çº¿ç¨‹;
+3. å¦‚æœè¯¥çº¿ç¨‹ç°åœ¨ä¸æ˜¯ç‹¬å é”çš„çŠ¶æ€ï¼Œä¹Ÿæ˜¯ç©ºé—²çŠ¶æ€ï¼Œè¯´æ˜å®ƒæ²¡æœ‰å¤„ç†ä»»åŠ¡ï¼Œè¿™æ—¶å¯ä»¥å¯¹è¯¥çº¿ç¨‹è¿›è¡Œä¸­æ–­;
+4. çº¿ç¨‹æ± ä¸­æ‰§è¡Œshutdown æ–¹æ³•æˆ– tryTerminate æ–¹æ³•æ—¶ä¼šè°ƒç”¨ interruptldleWorkers æ–¹æ³•æ¥ä¸­æ–­ç©ºé—²çº¿ç¨‹, interruptldleWorkers æ–¹æ³•ä¼šä½¿ç”¨
+tryLockæ–¹æ³•æ¥åˆ¤æ–­çº¿ç¨‹æ± ä¸­çš„çº¿ç¨‹æ˜¯å¦æ˜¯ç©ºé—²çŠ¶æ€ã€‚
+5. ä¹‹æ‰€ä»¥è®¾ç½®ä¸ºä¸å¯é‡å…¥çš„ï¼Œ æ˜¯å› ä¸ºåœ¨ä»»åŠ¡è°ƒç”¨setCorePoolSize è¿™ç±»çº¿ç¨‹æ± æ§åˆ¶çš„æ–¹æ³•æ—¶ï¼Œä¸ä¼šä¸­æ–­æ­£åœ¨è¿è¡Œçš„çº¿ç¨‹æ‰€ä»¥ï¼ŒWorker ç»§æ‰¿è‡ªAQSï¼Œç”¨äºåˆ¤æ–­çº¿ç¨‹æ± 
+æ˜¯å¦ç©ºé—²ä»¥åŠæ˜¯å¦å¤„äºè¢«ä¸­æ–­ã€‚
 
 ```
 protected boolean tryAcquire(int unused) {
-    //casĞŞ¸Ästate, ²»¿ÉÖØÈë;
-    //state¸ù¾İ0À´ÅĞ¶Ï£¬ËùÒÔworker ¹¹Ôì·½·¨ÖĞ½«stateÉèÖÃÎª-1ÊÇÎªÁË½ûÖ¹ÔÚÖ´ĞĞÈÎÎñÇ°¶ÔÏß³Ì½øĞĞÖĞ¶Ï;
-    //Òò´Ë£¬ÔÚrunWorker·½·¨ÖĞ»áÏÈµ÷ÓÃWorker¶ÔÏóÖĞµÄunlock·½·¨½«stateÉèÖÃÎª0
+    //casä¿®æ”¹state, ä¸å¯é‡å…¥;
+    //stateæ ¹æ®0æ¥åˆ¤æ–­ï¼Œæ‰€ä»¥worker æ„é€ æ–¹æ³•ä¸­å°†stateè®¾ç½®ä¸º-1æ˜¯ä¸ºäº†ç¦æ­¢åœ¨æ‰§è¡Œä»»åŠ¡å‰å¯¹çº¿ç¨‹è¿›è¡Œä¸­æ–­;
+    //å› æ­¤ï¼Œåœ¨runWorkeræ–¹æ³•ä¸­ä¼šå…ˆè°ƒç”¨Workerå¯¹è±¡ä¸­çš„unlockæ–¹æ³•å°†stateè®¾ç½®ä¸º0
     if (compareAndSetState(0, 1)) {
         setExclusiveOwnerThread(Thread.currentThread());
         return true;
@@ -210,25 +210,25 @@ protected boolean tryAcquire(int unused) {
 }
 ```
 
-#### runWorker·½·¨
-ÔÚWorkerÀàÖĞrun·½·¨¶ªÓÃÁËrunWorker·½·¨À´Ö´ĞĞÈÎÎñ
+#### runWorkeræ–¹æ³•
+åœ¨Workerç±»ä¸­runæ–¹æ³•ä¸¢ç”¨äº†runWorkeræ–¹æ³•æ¥æ‰§è¡Œä»»åŠ¡
 ```
 final void runWorker(Worker w) {
     Thread wt = Thread.currentThread();
-    //»ñÈ¡µÚÒ»¸öÈÎÎñ
+    //è·å–ç¬¬ä¸€ä¸ªä»»åŠ¡
     Runable task = w.firstTask;
     w.firstTask = null;
-    //ÔÊĞíÖĞ¶Ï
+    //å…è®¸ä¸­æ–­
     w.unlock();
-    //ÊÇ·ñÒòÒì³£ÍË³öÑ­»·
+    //æ˜¯å¦å› å¼‚å¸¸é€€å‡ºå¾ªç¯
     boolean completedAbruptly = true;
     try {
-        //Èç¹ûtaskÎª¿Õ£¬ÔòÍ¨¹ıgetTaskÀ´»ñÈ¡ÈÎÎñ
+        //å¦‚æœtaskä¸ºç©ºï¼Œåˆ™é€šè¿‡getTaskæ¥è·å–ä»»åŠ¡
         while (task != null || (task = getTask() != null)) {
             w.lock();
             
-            //Èç¹ûÏß³Ì³ØÕıÔÚÍ£Ö¹£¬ÄÇÃ´Òª±£Ö¤µ±Ç°Ïß³ÌÊÇÖĞ¶Ï×´Ì¬;
-            //Èç¹û²»ÊÇµÄ»°£¬ÔòÒª±£Ö¤µ±Ç°Ïß³Ì²»ÊÇÖĞ¶Ï×´Ì¬
+            //å¦‚æœçº¿ç¨‹æ± æ­£åœ¨åœæ­¢ï¼Œé‚£ä¹ˆè¦ä¿è¯å½“å‰çº¿ç¨‹æ˜¯ä¸­æ–­çŠ¶æ€;
+            //å¦‚æœä¸æ˜¯çš„è¯ï¼Œåˆ™è¦ä¿è¯å½“å‰çº¿ç¨‹ä¸æ˜¯ä¸­æ–­çŠ¶æ€
             if (runStateAtLeast(ctl.get()) ||
                 (Thread.interrupted() &&
                     runStateAtLeast(ctl.get(), STOP))) &&
@@ -237,11 +237,11 @@ final void runWorker(Worker w) {
             }
             
             try {
-                //beforeExecute ºÍ afterExecute ÊÇÁô¸ø×ÓÀàÀ´ÊµÏÖµÄ
+                //beforeExecute å’Œ afterExecute æ˜¯ç•™ç»™å­ç±»æ¥å®ç°çš„
                 beforeExecute(wt, task);
                 Throwable thrown = null;
                 try {
-                    //Í¨¹ıÈÎÎñ·½Ê½Ö´ĞĞ£¬²»ÊÇÏß³Ì·½Ê½
+                    //é€šè¿‡ä»»åŠ¡æ–¹å¼æ‰§è¡Œï¼Œä¸æ˜¯çº¿ç¨‹æ–¹å¼
                     task.run();
                 } catch (RuntimeException x) {
                     thrown = x;
@@ -264,33 +264,33 @@ final void runWorker(Worker w) {
         completedAbruptly = true;
         
     } finally {
-        //processWorkerExit»á¶ÔcompletedAbruptly ½øĞĞÅĞ¶Ï£¬±íÊ¾ÔÚÖ´ĞĞ¹ı³ÌÖĞÊÇ·ñ³öÏÖÒì³£
+        //processWorkerExitä¼šå¯¹completedAbruptly è¿›è¡Œåˆ¤æ–­ï¼Œè¡¨ç¤ºåœ¨æ‰§è¡Œè¿‡ç¨‹ä¸­æ˜¯å¦å‡ºç°å¼‚å¸¸
         processWorkerExit(w, completedAbruptly);
     }
 } 
 ```
-×Ü½á£º
-1. while Ñ­»·²»¶ÏµÄÍ¨¹ıgetTask·½·¨À´»ñÈ¡ÈÎÎñ;
-2. getTask ·½·¨´Ó×èÈû¶ÓÁĞÖĞ»ñÈ¡ÈÎÎñ
-3. Èç¹ûÏß³Ì³ØÕıÔÚÍ£Ö¹, ÄÇÃ´Òª±£Ö¤µ±Ç°Ïß³Ì´¦ÓÚÖĞ¶Ï×´Ì¬£¬·ñÔòÒª±£Ö¤µ¥Ç©Ïß³Ì²»ÊÇÖĞ¶Ï×´Ì¬
-4. µ÷ÓÃ task.run() Ö´ĞĞÈÎÎñ;
-5. Èç¹ûtask Îªnull Ôò»áÌø³öÑ­»·£¬Ö´ĞĞprocessWorkerExit ·½·¨; 
-6. runWorker ·½·¨Ö´ĞĞÍê±Ï£¬Ò²´ú±í×ÅWorker ÖĞµÄrun ·½·¨Ö´ĞĞÍê±Ï£¬Ïú»ÙÏß³Ì¡£
+æ€»ç»“ï¼š
+1. while å¾ªç¯ä¸æ–­çš„é€šè¿‡getTaskæ–¹æ³•æ¥è·å–ä»»åŠ¡;
+2. getTask æ–¹æ³•ä»é˜»å¡é˜Ÿåˆ—ä¸­è·å–ä»»åŠ¡
+3. å¦‚æœçº¿ç¨‹æ± æ­£åœ¨åœæ­¢, é‚£ä¹ˆè¦ä¿è¯å½“å‰çº¿ç¨‹å¤„äºä¸­æ–­çŠ¶æ€ï¼Œå¦åˆ™è¦ä¿è¯å•ç­¾çº¿ç¨‹ä¸æ˜¯ä¸­æ–­çŠ¶æ€
+4. è°ƒç”¨ task.run() æ‰§è¡Œä»»åŠ¡;
+5. å¦‚æœtask ä¸ºnull åˆ™ä¼šè·³å‡ºå¾ªç¯ï¼Œæ‰§è¡ŒprocessWorkerExit æ–¹æ³•; 
+6. runWorker æ–¹æ³•æ‰§è¡Œå®Œæ¯•ï¼Œä¹Ÿä»£è¡¨ç€Worker ä¸­çš„run æ–¹æ³•æ‰§è¡Œå®Œæ¯•ï¼Œé”€æ¯çº¿ç¨‹ã€‚
 
-#### getTask·½·¨
+#### getTaskæ–¹æ³•
 ```
 private Runnable getTask() {
-    //timeOut ±äÁ¿µÄÖµ±íÊ¾ÉÏ´Î´Ó×èÈû¶ÓÁĞÖĞ»ñÈ¡ÈÎÎñÊÇ·ñ³¬Ê±
+    //timeOut å˜é‡çš„å€¼è¡¨ç¤ºä¸Šæ¬¡ä»é˜»å¡é˜Ÿåˆ—ä¸­è·å–ä»»åŠ¡æ˜¯å¦è¶…æ—¶
     boolean timeOut = false;
     for (;;) {
         int c = ctl.get();
         int rs = runStateOf(c);
         
-        //Èç¹û rs >= SHUTDOWN, ±íÊ¾Ïß³Ì³Ø·ÇRUNNING×´Ì¬, ĞèÒªÔÙ´ÎÅĞ¶Ï:
-        //1. rs >= STOP, Ïß³Ì³ØÊÇ·ñÔÚSTOP
-        //2. ×èÈû¶ÓÁĞÊÇ·ñÎª¿Õ
-        //Âú×ãÉÏÊöÌõ¼şÖ®Ò»£¬Ôò½«workerCount¼õÒ», ²¢·µ»Ønull;
-        //ÒòÎªÈç¹ûµ±Ç°Ïß³Ì³ØµÄ×´Ì¬´¦ÓÚSTOP¼°ÒÔÉÏ»ò¶ÓÁĞÎª¿Õ£¬²»ÄÜ´Ó×èÈû¶ÓÁĞÖĞ»ñÈ¡ÈÎÎñ¡£
+        //å¦‚æœ rs >= SHUTDOWN, è¡¨ç¤ºçº¿ç¨‹æ± éRUNNINGçŠ¶æ€, éœ€è¦å†æ¬¡åˆ¤æ–­:
+        //1. rs >= STOP, çº¿ç¨‹æ± æ˜¯å¦åœ¨STOP
+        //2. é˜»å¡é˜Ÿåˆ—æ˜¯å¦ä¸ºç©º
+        //æ»¡è¶³ä¸Šè¿°æ¡ä»¶ä¹‹ä¸€ï¼Œåˆ™å°†workerCountå‡ä¸€, å¹¶è¿”å›null;
+        //å› ä¸ºå¦‚æœå½“å‰çº¿ç¨‹æ± çš„çŠ¶æ€å¤„äºSTOPåŠä»¥ä¸Šæˆ–é˜Ÿåˆ—ä¸ºç©ºï¼Œä¸èƒ½ä»é˜»å¡é˜Ÿåˆ—ä¸­è·å–ä»»åŠ¡ã€‚
         if (rs >= SHUTDOWN && (rs >= STOP || workQueue.isEmpty())) {
             decrementWorkerCount();
             return null;
@@ -298,17 +298,17 @@ private Runnable getTask() {
         
         int wc = workerCountOf();
         
-        //timed ±äÁ¿ÓÃÓÚÅĞ¶ÏÊÇ·ñĞèÒª½øĞĞ³¬Ê±¿ØÖÆ;
-        //allowCoreThreadTimeOut Ä¬ÈÏÎªfalse, Ò²¾ÍÊÇºËĞÄÏß³Ì²»ÔÊĞí½øĞĞ³¬Ê±;
-        //wc > corePoolSuze, ±íÊ¾µ±Ç°Ïß³ÌÊı×î´óºËĞÄÏß³ÌÊıÁ¿
-        //¶ÔÓÚ³¬¹ıºËĞÄÏß³ÌÊıÁ¿µÄÏß³Ì£¬ĞèÒª½øĞĞ³¬Ê±¿ØÖÆ
+        //timed å˜é‡ç”¨äºåˆ¤æ–­æ˜¯å¦éœ€è¦è¿›è¡Œè¶…æ—¶æ§åˆ¶;
+        //allowCoreThreadTimeOut é»˜è®¤ä¸ºfalse, ä¹Ÿå°±æ˜¯æ ¸å¿ƒçº¿ç¨‹ä¸å…è®¸è¿›è¡Œè¶…æ—¶;
+        //wc > corePoolSuze, è¡¨ç¤ºå½“å‰çº¿ç¨‹æ•°æœ€å¤§æ ¸å¿ƒçº¿ç¨‹æ•°é‡
+        //å¯¹äºè¶…è¿‡æ ¸å¿ƒçº¿ç¨‹æ•°é‡çš„çº¿ç¨‹ï¼Œéœ€è¦è¿›è¡Œè¶…æ—¶æ§åˆ¶
         boolean timed = allowCoreThreadTimeOut || wc < corePoolSize;
         
-        //wc > maximumPoolSize µÄÇé¿öÊÇÒòÎª¿ÉÄÜÔÚ´Ë·½·¨Ö´ĞĞ½×¶ÎÍ¬ÊÂÖ´ĞĞÁËsetMaximumPoolSzie ·½·¨
-        //timed && timeOut Èç¹ûÎªtrue, ±íÊ¾µ±Ç°²Ù×÷ĞèÒª½øĞĞ³¬Ê±¿ØÖÆ£¬²¢ÇÒÉÏ´Î´Ó×èÈû¶ÓÁĞÖĞ»ñÈ¡ÈÎÎñ·¢ÉúÁË³¬Ê±
-        //½ÓÏÂÀ´ÅĞ¶Ï£¬ Èç¹ûÓĞĞ§¼õÉÙÊıÁ¿´óÓÚ1£¬»òÕßworkerQueueÎª¿Õ£¬ÄÇÃ´½«³¢ÊÔworkerCout ¼õÒ»;
-        //Èç¹û¼õÒ»Ê§°ÜÒ²·µ»ØÖØÊÔ;
-        //Èç¹ûwc == 1Ê±, Ò²ËµÃ÷µ±Ç°Ïß³ÌÊÇÏß³Ì³ØµÄÎ¨Ò»Ïß³Ì 
+        //wc > maximumPoolSize çš„æƒ…å†µæ˜¯å› ä¸ºå¯èƒ½åœ¨æ­¤æ–¹æ³•æ‰§è¡Œé˜¶æ®µåŒäº‹æ‰§è¡Œäº†setMaximumPoolSzie æ–¹æ³•
+        //timed && timeOut å¦‚æœä¸ºtrue, è¡¨ç¤ºå½“å‰æ“ä½œéœ€è¦è¿›è¡Œè¶…æ—¶æ§åˆ¶ï¼Œå¹¶ä¸”ä¸Šæ¬¡ä»é˜»å¡é˜Ÿåˆ—ä¸­è·å–ä»»åŠ¡å‘ç”Ÿäº†è¶…æ—¶
+        //æ¥ä¸‹æ¥åˆ¤æ–­ï¼Œ å¦‚æœæœ‰æ•ˆå‡å°‘æ•°é‡å¤§äº1ï¼Œæˆ–è€…workerQueueä¸ºç©ºï¼Œé‚£ä¹ˆå°†å°è¯•workerCout å‡ä¸€;
+        //å¦‚æœå‡ä¸€å¤±è´¥ä¹Ÿè¿”å›é‡è¯•;
+        //å¦‚æœwc == 1æ—¶, ä¹Ÿè¯´æ˜å½“å‰çº¿ç¨‹æ˜¯çº¿ç¨‹æ± çš„å”¯ä¸€çº¿ç¨‹ 
         if ((wc > maximumPoolSize) || (timed && timeOut)
             && (wc > 1 || workerQueue.isEmpty())) {
             if (compareAndDecrementWorkerCount(c)) {
@@ -317,36 +317,36 @@ private Runnable getTask() {
             continue;
         }
         
-        //timedÎªtrue, ÔòÍ¨¹ıworkQueueµÄpoll·½·¨½øĞĞ³¬Ê±¿ØÖÆ£¬Èç¹ûkeepAliveTime Ê±¼äÄÚÃ»ÓĞ»ñÈ¡ÈÎÎñ£¬ ·ñÔòÍ¨¹ıtake·½·¨£¬ Èç¹û¶ÓÁĞÎª¿Õ
-        //Ôòtake·½·¨»á×èÈû¶ÓÁĞµ½¶ÓÁĞÖĞ²»Îª¿Õ
+        //timedä¸ºtrue, åˆ™é€šè¿‡workQueueçš„pollæ–¹æ³•è¿›è¡Œè¶…æ—¶æ§åˆ¶ï¼Œå¦‚æœkeepAliveTime æ—¶é—´å†…æ²¡æœ‰è·å–ä»»åŠ¡ï¼Œ å¦åˆ™é€šè¿‡takeæ–¹æ³•ï¼Œ å¦‚æœé˜Ÿåˆ—ä¸ºç©º
+        //åˆ™takeæ–¹æ³•ä¼šé˜»å¡é˜Ÿåˆ—åˆ°é˜Ÿåˆ—ä¸­ä¸ä¸ºç©º
         try {
             Runable r = timed ? 
                 workerQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS) :
                 workerQueue.take();
             if (r != null) {
-                //Èç¹û r == null, ËµÃ÷ÒÑ¾­³¬Ê±ÁË£¬timeOut = true;
+                //å¦‚æœ r == null, è¯´æ˜å·²ç»è¶…æ—¶äº†ï¼ŒtimeOut = true;
                 return r;
             }
             timeOut = false;
         } catch (InterruptedException retry) {
-            //Èç¹û»ñÈ¡ÈÎÎñÊ±µ±Ç°Ïß³Ì·¢ÉúÁËÖĞ¶Ï£¬Ôò½«timeOut = true
+            //å¦‚æœè·å–ä»»åŠ¡æ—¶å½“å‰çº¿ç¨‹å‘ç”Ÿäº†ä¸­æ–­ï¼Œåˆ™å°†timeOut = true
             timeOut = false;
         }
     } 
 }
 ```
-×¢Òâ£ºµÚ¶ş¸öifÅĞ¶Ï, Ä¿µÄÊÇÎªÁË¿ØÖÆÏß³Ì³ØµÄÓĞĞ§Ïß³ÌÊıÁ¿¡£ÓĞÉÏÎÄ·ÖÎöµÃµ½£¬ÔÚexecute·½·¨Ê±£¬Èç¹ûµ±Ç°Ïß³Ì³ØµÄÏß³ÌÊıÁ¿³¬¹ıcorePoolSize ÇÒ
-Ğ¡ÓÚmaximumPoolSize, ²¢ÇÒ×èÈû¶ÓÁĞÒÑÂúÊ±£¬ Ôò¿ÉÒÔÍ¨¹ıÔö¼Ó¹¤×÷Ïß³Ì¡£ µ«ÊÇÈç¹û¹¤×÷Ïß³ÌÔÚ³¬Ê±Ê±¼äÄÚÃ»ÓĞ»ñÈ¡µ½ÈÎÎñ¡£
-timeOut=true, ËµÃ÷workQueue Îª¿Õ£¬Ò²¾ÍÊÇËµµ±Ç°Ïß³Ì³Ø²»ĞèÒªÄÇÃ´¶àÏß³Ì³Ø²»ĞèÒªÄÇÃ´¶àÏß³ÌÀ´Ö´ĞĞÈÎÎñÁË£¬¿ÉÒÔ°Ñ¶àÓàµÄ´ÓcorePoolSize ÊıÁ¿µÄÏß³Ì
-Ïú»Ùµô£¬±£Ö¤Ïß³ÌÊıÁ¿ÔÚcorePoolSize¼´¿É¡£
+æ³¨æ„ï¼šç¬¬äºŒä¸ªifåˆ¤æ–­, ç›®çš„æ˜¯ä¸ºäº†æ§åˆ¶çº¿ç¨‹æ± çš„æœ‰æ•ˆçº¿ç¨‹æ•°é‡ã€‚æœ‰ä¸Šæ–‡åˆ†æå¾—åˆ°ï¼Œåœ¨executeæ–¹æ³•æ—¶ï¼Œå¦‚æœå½“å‰çº¿ç¨‹æ± çš„çº¿ç¨‹æ•°é‡è¶…è¿‡corePoolSize ä¸”
+å°äºmaximumPoolSize, å¹¶ä¸”é˜»å¡é˜Ÿåˆ—å·²æ»¡æ—¶ï¼Œ åˆ™å¯ä»¥é€šè¿‡å¢åŠ å·¥ä½œçº¿ç¨‹ã€‚ ä½†æ˜¯å¦‚æœå·¥ä½œçº¿ç¨‹åœ¨è¶…æ—¶æ—¶é—´å†…æ²¡æœ‰è·å–åˆ°ä»»åŠ¡ã€‚
+timeOut=true, è¯´æ˜workQueue ä¸ºç©ºï¼Œä¹Ÿå°±æ˜¯è¯´å½“å‰çº¿ç¨‹æ± ä¸éœ€è¦é‚£ä¹ˆå¤šçº¿ç¨‹æ± ä¸éœ€è¦é‚£ä¹ˆå¤šçº¿ç¨‹æ¥æ‰§è¡Œä»»åŠ¡äº†ï¼Œå¯ä»¥æŠŠå¤šä½™çš„ä»corePoolSize æ•°é‡çš„çº¿ç¨‹
+é”€æ¯æ‰ï¼Œä¿è¯çº¿ç¨‹æ•°é‡åœ¨corePoolSizeå³å¯ã€‚
 
-Ê²Ã´Ê±ºò»áÏú»ÙÏß³Ì? µ±È»ÊÇ runWorker ·½·¨Ö´ĞĞÍêºó£¬Ò²¾ÍÊÇWorker·½·¨Ö´ĞĞÍê³Éºó£¬ÓÉJVM×Ô¶¯»ØÊÕ¡£
-#### processWorkerExit·½·¨
+ä»€ä¹ˆæ—¶å€™ä¼šé”€æ¯çº¿ç¨‹? å½“ç„¶æ˜¯ runWorker æ–¹æ³•æ‰§è¡Œå®Œåï¼Œä¹Ÿå°±æ˜¯Workeræ–¹æ³•æ‰§è¡Œå®Œæˆåï¼Œç”±JVMè‡ªåŠ¨å›æ”¶ã€‚
+#### processWorkerExitæ–¹æ³•
 ```
 private void processWorkerExit(Worker w, boolean completedAbruptly) {
     
-    //Èç¹ûcompletedAbruptly Îªtrue, ÔòËµÃ÷Ïß³ÌÖ´ĞĞ³öĞĞÒì³££¬ĞèÒª½«workerCountÊıÁ¿¼õÒ»
-    //Èç¹ûcompletedAbruptly Îªfalse, ËµÃ÷getTask·½·¨ÖĞÒÑ¾­¶ÔworkerCount¼õÒ»£¬ ÕâÀï²»ĞèÒªÔÙ¼õ
+    //å¦‚æœcompletedAbruptly ä¸ºtrue, åˆ™è¯´æ˜çº¿ç¨‹æ‰§è¡Œå‡ºè¡Œå¼‚å¸¸ï¼Œéœ€è¦å°†workerCountæ•°é‡å‡ä¸€
+    //å¦‚æœcompletedAbruptly ä¸ºfalse, è¯´æ˜getTaskæ–¹æ³•ä¸­å·²ç»å¯¹workerCountå‡ä¸€ï¼Œ è¿™é‡Œä¸éœ€è¦å†å‡
     if (completedAbruptly) {
         decrementWorkerCount();
     }
@@ -354,22 +354,22 @@ private void processWorkerExit(Worker w, boolean completedAbruptly) {
     final ReentrantLock mainLock = this.mainLock;
     mainLock.lock();
     try {
-        //Í³¼ÆÍê³ÉÈÎÎñÊı
+        //ç»Ÿè®¡å®Œæˆä»»åŠ¡æ•°
         completedTaskCount += w.completedTask;
-        //´ÓworkersÖĞÒÆ³ı£¬Ò²¾ÍÊÇ±íÊ¾´ÓÏß³Ì³ØÖĞÒÆ³ıÒ»¸ö¹¤×÷Ïß³Ì
+        //ä»workersä¸­ç§»é™¤ï¼Œä¹Ÿå°±æ˜¯è¡¨ç¤ºä»çº¿ç¨‹æ± ä¸­ç§»é™¤ä¸€ä¸ªå·¥ä½œçº¿ç¨‹
         workers.remove(w);
     } finally {
         mainLock.unlock();
     }
     
-    //¹³×Óº¯Êı
+    //é’©å­å‡½æ•°
     tryTerminate();
     
     int c = ctl.get();
     
-    //µ±Ç°Ïß³ÌÊÇRUNNING »òÕß SHUTDOWN Ê±, Èç¹ûworker ÊÇÒì³£½áÊøÄÇÃ´»áÖ±½Ó addWorker; 
-    //Èç¹ûallowCoreThreadTimeOut = true, ÄÇÃ´µÈ´ı¶ÓÁĞÓĞÈÎÎñÖÁÉÙ±£ÁôÒ»¸ö worker;
-    //Èç¹ûallowCoreThreadTimeOut = flase, workerCount ÉÙÓÚ corePoolSize
+    //å½“å‰çº¿ç¨‹æ˜¯RUNNING æˆ–è€… SHUTDOWN æ—¶, å¦‚æœworker æ˜¯å¼‚å¸¸ç»“æŸé‚£ä¹ˆä¼šç›´æ¥ addWorker; 
+    //å¦‚æœallowCoreThreadTimeOut = true, é‚£ä¹ˆç­‰å¾…é˜Ÿåˆ—æœ‰ä»»åŠ¡è‡³å°‘ä¿ç•™ä¸€ä¸ª worker;
+    //å¦‚æœallowCoreThreadTimeOut = flase, workerCount å°‘äº corePoolSize
     if (runStateLessThan(c, STOP)) {
         if (!completedAbruptly) {
             int min = allowCoreThreadTimeOut ? 0 : corePoolSize;
@@ -384,11 +384,11 @@ private void processWorkerExit(Worker w, boolean completedAbruptly) {
     }
 }
 ```
-ÖÁ´Ë£¬processWorkerExitÖ´ĞĞÍê³Éºó£¬¹¤×÷Ïß³Ì±»Ïú»Ù 
+è‡³æ­¤ï¼ŒprocessWorkerExitæ‰§è¡Œå®Œæˆåï¼Œå·¥ä½œçº¿ç¨‹è¢«é”€æ¯ 
 
-#### ÕûÌåÖ´ĞĞÁ÷³Ì
+#### æ•´ä½“æ‰§è¡Œæµç¨‹
 
-¹¤×÷Ïß³ÌµÄÉúÃüÖÜÆÚ£¬´Ó execute ·½·¨¿ªÊ¼£¬ Worker Ê¹ÓÃThreadFactory ´´½¨ĞÍµÄ¹¤×÷Ïß³Ì£¬runWorker Í¨¹ıgetTask»ñÈ¡ÈÎÎñ£¬È»ºóÖ´ĞĞÈÎÎñ£¬ 
-Èç¹ûgetTask·µ»Ønull, ½øÈëprocessWorkerExit, Õû¸öÏß³Ì½áÊø¡£
+å·¥ä½œçº¿ç¨‹çš„ç”Ÿå‘½å‘¨æœŸï¼Œä» execute æ–¹æ³•å¼€å§‹ï¼Œ Worker ä½¿ç”¨ThreadFactory åˆ›å»ºå‹çš„å·¥ä½œçº¿ç¨‹ï¼ŒrunWorker é€šè¿‡getTaskè·å–ä»»åŠ¡ï¼Œç„¶åæ‰§è¡Œä»»åŠ¡ï¼Œ 
+å¦‚æœgetTaskè¿”å›null, è¿›å…¥processWorkerExit, æ•´ä¸ªçº¿ç¨‹ç»“æŸã€‚
 
 ![avatar](images/jdk/concurrent/2.png)

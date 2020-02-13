@@ -1,42 +1,42 @@
-JVMµÄÌåÏµ½á¹¹±©ÐÐÖ÷ÒªµÄ¼¸¸ö×ÓÏµÍ³ºÍÄÚ´æ·ÖÎö
+JVMçš„ä½“ç³»ç»“æž„æš´è¡Œä¸»è¦çš„å‡ ä¸ªå­ç³»ç»Ÿå’Œå†…å­˜åˆ†æž
 
-Ò»¡¢JVM¼ò½é
+ä¸€ã€JVMç®€ä»‹
 
-1¡¢À¬»ø»ØÊÕÆÚ£¨Garbage Collection£©£º ¸ºÔð»ØÊÕ¶ÑÄÚ´æ£¨Heap£©ÖÐÃ»ÓÐÒýÓÃµÄ¶ÔÏó
-2¡¢Àà×°ÔØ×øÏ¯ÏµÍ³£¨Classloader Sub-System£©: ³ýÁËÒª¶¨Î»ºÍµ¼Èë¶þ½øÖÆclassÎÄ¼þÍâ£¬»¹±ØÐë¸ºÔðÐ£Ñé±»µ¼ÈëÀàµÄÕýÈ·ÐÔ£¬ÎªÀà±äÁ¿·ÖÅä²¢³õÊ¼»¯ÄÚ´æ£¬ÒÔ¼°°ïÖú½âÎö·ûºÅÒýÓÃ¡£
-3¡¢Ö´ÐÐÒýÇæ£¨Execution Engine£©: ¸ºÔðÖ´ÐÐÄÄÐ©°üº¬ÔÚ±»×°ÔØÀàµÄ·½·¨ÖÐµÄÖ¸Áî¡£
-4¡¢ÔËÐÐÊ±Êý¾ÝÇø£¨Java Memory Alloction Area£©: ÓÖ½ÐÐéÄâ»úÄÚ´æ»òÕßJavaÄÚ´æ£¬ÐéÄâ»úÔËÐÐÐèÒª´ÓÕû¸ö¼ÆËã»úÄÚ´æ»®·ÖÒ»¿éÄÚ´æÇøÓòÀ´´æ´¢¡£
+1ã€åžƒåœ¾å›žæ”¶æœŸï¼ˆGarbage Collectionï¼‰ï¼š è´Ÿè´£å›žæ”¶å †å†…å­˜ï¼ˆHeapï¼‰ä¸­æ²¡æœ‰å¼•ç”¨çš„å¯¹è±¡
+2ã€ç±»è£…è½½åå¸­ç³»ç»Ÿï¼ˆClassloader Sub-Systemï¼‰: é™¤äº†è¦å®šä½å’Œå¯¼å…¥äºŒè¿›åˆ¶classæ–‡ä»¶å¤–ï¼Œè¿˜å¿…é¡»è´Ÿè´£æ ¡éªŒè¢«å¯¼å…¥ç±»çš„æ­£ç¡®æ€§ï¼Œä¸ºç±»å˜é‡åˆ†é…å¹¶åˆå§‹åŒ–å†…å­˜ï¼Œä»¥åŠå¸®åŠ©è§£æžç¬¦å·å¼•ç”¨ã€‚
+3ã€æ‰§è¡Œå¼•æ“Žï¼ˆExecution Engineï¼‰: è´Ÿè´£æ‰§è¡Œå“ªäº›åŒ…å«åœ¨è¢«è£…è½½ç±»çš„æ–¹æ³•ä¸­çš„æŒ‡ä»¤ã€‚
+4ã€è¿è¡Œæ—¶æ•°æ®åŒºï¼ˆJava Memory Alloction Areaï¼‰: åˆå«è™šæ‹Ÿæœºå†…å­˜æˆ–è€…Javaå†…å­˜ï¼Œè™šæ‹Ÿæœºè¿è¡Œéœ€è¦ä»Žæ•´ä¸ªè®¡ç®—æœºå†…å­˜åˆ’åˆ†ä¸€å—å†…å­˜åŒºåŸŸæ¥å­˜å‚¨ã€‚
 
-¶þ¡¢Java ÄÚ´æ·ÖÅä
-JavaÄÚ´æÍ¨³£±»»®·ÖÎª5¸öÇøÓò£º³ÌÐò¼ÆÊýÆ÷£¨Program Count Register£©¡¢±¾µØ·½·¨Õ»£¨Native Stack£©¡¢·½·¨Çø£¨Method Area£©¡¢Õ»£¨Stack£©¡¢¶Ñ£¨Heap£©
+äºŒã€Java å†…å­˜åˆ†é…
+Javaå†…å­˜é€šå¸¸è¢«åˆ’åˆ†ä¸º5ä¸ªåŒºåŸŸï¼šç¨‹åºè®¡æ•°å™¨ï¼ˆProgram Count Registerï¼‰ã€æœ¬åœ°æ–¹æ³•æ ˆï¼ˆNative Stackï¼‰ã€æ–¹æ³•åŒºï¼ˆMethod Areaï¼‰ã€æ ˆï¼ˆStackï¼‰ã€å †ï¼ˆHeapï¼‰
 
-1¡¢³ÌÐò¼ÆÊýÆ÷£¨Program Count Registor£©: ÓÖ½Ð³ÌÐò¼Ä´æÆ÷£¬JVMÖ§³Ö¶à¸öÏß³ÌÍ¬Ê±ÔËÐÐ£¬Ã¿µ±Ò»¸öÐÂÏß³Ì´´½¨Ê±£¬Ëû¶¼½«µÃµ½Ëü×Ô¼ºµÄPC¼Ä´æÆ÷£¨³ÌÐò¼ÆÊýÆ÷£©¡£Èç¹ûÒ»¸öÏß³ÌÕýÔÚÖ´ÐÐµÄÒ»¸öJava·½·¨£¨·Çnative£©£¬ÄÇÃ´PC¼Ä´æÆ÷µÄÖµ½¯×ÜÊÇÖ´ÐÐÏÂÒ»Ìõ½«±»Ö´ÐÐµÄÖ¸Áî£¬Èç¹û·½·¨ÊÇnativeµÄ¡£³ÌÐò¼ÆÊýÆ÷µÄÖµ²»»á±»¶¨Òå£¬JVMµÄ³ÌÐò¼Ä´æÆ÷µÄ¿í¶È×ã¹»¿ÉÒÔ³ÖÓÐÒ»¸ö·µ»ØµØÖ·»òÕßnativeµÄÖ¸Õë¡£
+1ã€ç¨‹åºè®¡æ•°å™¨ï¼ˆProgram Count Registorï¼‰: åˆå«ç¨‹åºå¯„å­˜å™¨ï¼ŒJVMæ”¯æŒå¤šä¸ªçº¿ç¨‹åŒæ—¶è¿è¡Œï¼Œæ¯å½“ä¸€ä¸ªæ–°çº¿ç¨‹åˆ›å»ºæ—¶ï¼Œä»–éƒ½å°†å¾—åˆ°å®ƒè‡ªå·±çš„PCå¯„å­˜å™¨ï¼ˆç¨‹åºè®¡æ•°å™¨ï¼‰ã€‚å¦‚æžœä¸€ä¸ªçº¿ç¨‹æ­£åœ¨æ‰§è¡Œçš„ä¸€ä¸ªJavaæ–¹æ³•ï¼ˆéžnativeï¼‰ï¼Œé‚£ä¹ˆPCå¯„å­˜å™¨çš„å€¼è’‹æ€»æ˜¯æ‰§è¡Œä¸‹ä¸€æ¡å°†è¢«æ‰§è¡Œçš„æŒ‡ä»¤ï¼Œå¦‚æžœæ–¹æ³•æ˜¯nativeçš„ã€‚ç¨‹åºè®¡æ•°å™¨çš„å€¼ä¸ä¼šè¢«å®šä¹‰ï¼ŒJVMçš„ç¨‹åºå¯„å­˜å™¨çš„å®½åº¦è¶³å¤Ÿå¯ä»¥æŒæœ‰ä¸€ä¸ªè¿”å›žåœ°å€æˆ–è€…nativeçš„æŒ‡é’ˆã€‚
 
-2¡¢Õ»£¨Stack£©: ÓÖ½Ð×ö¶ÑÕ»£¬JVMÃ¿¸öÐÂ´´½¨µÄÏß³Ì¶¼·ÖÅäÒ»¸öÕ»£¬Ò²¾ÍÊÇËµ£¬¶ÔÓÚÒ»¸öJava³ÌÐòÀ´Ëµ£¬ËüµÄÔËÐÐÊÇÍ¨¹ý¶ÔÕ»µÄ²Ù×÷À´Íê³ÉµÄ£¬Õ»ÒÔÖ¡Îªµ¥Î»±£´æÏß³ÌµÄ×´Ì¬¡£Jvm¶ÔÕ»Ö»½øÐÐÁ½ÖÖ²Ù×÷£ºÒÔÖ¡Îªµ¥Î»µÄÑ¹Õ»ºÍ³öÕ»²Ù×÷¡£ÎÒÃÇÖªµÀ£¬Ä³¸öÏß³ÌÕýÔÚÖ´ÐÐµÄ·½·¨³ÆÎª´ËÏß³ÌµÄµ±Ç°·½·¨£¬ÎÒÃÇ¿ÉÄÜ²»ÖªµÀ£¬µ±Ç°·½·¨Ê¹ÓÃµÄÖ¡³ÌÐòµ±Ç°Ö¡¡£µ±ÏÖ³É¼¤»îÒ»¸öJava·½·¨£¬JVM¾Í»áÔÚÏß³ÌµÄJava¶ÑÕ»ÀïÐÂÑÅÈãÒ»¸öÖ¡£¬Õâ¸öÖ¡×ÔÈ»³ÉÎªÁËµ±Ç°Ö¡¡£ÔÚ´Ë·½·¨Ö´ÐÐÆÚ¼ä£¬Õâ¸öÖ¡½«ÓÃÀ´±£´æ²ÎÊý£¬¾Ö²¿±äÁ¿£¬ÖÐ¼ä¼ÆËã¹ý³ÌºÍÆäËûÊý¾Ý¡£´ÓJavaµÄÕâÖÖ·ÖÅä»úÖÆÀ´¿´£¬¶ÑÕ»ÓÖ¿ÉÒÔÕâÑùÀí½â£ºÕ»£¨Stack£©ÊÇ²Ù×÷ÏµÍ³ÔÚ½¨Á¢Ä³¸ö½ø³Ì»òÕßÏß³Ì£¬£¨ÔÚÖ§³Ö¶àÏÈ²âºÜÄÑ¹ýµÄ²Ù×÷ÏµÍ³ÖÐÊÇÏß³Ì£©ÎªÕâ¸öÏß³Ì¼òÀúÒ»¸ö´¢´æÆäÓà£¬¸ÃÇøÓò¾ßÓÐÏÈ½øÏÈ³öµÄÌØÕ÷¡£ÆäÏà¹ØÉèÖÃ²ÎÊý£º
--Xss -- ÉèÖÃ·½·¨Õ»µÄ×î´óÖµ
+2ã€æ ˆï¼ˆStackï¼‰: åˆå«åšå †æ ˆï¼ŒJVMæ¯ä¸ªæ–°åˆ›å»ºçš„çº¿ç¨‹éƒ½åˆ†é…ä¸€ä¸ªæ ˆï¼Œä¹Ÿå°±æ˜¯è¯´ï¼Œå¯¹äºŽä¸€ä¸ªJavaç¨‹åºæ¥è¯´ï¼Œå®ƒçš„è¿è¡Œæ˜¯é€šè¿‡å¯¹æ ˆçš„æ“ä½œæ¥å®Œæˆçš„ï¼Œæ ˆä»¥å¸§ä¸ºå•ä½ä¿å­˜çº¿ç¨‹çš„çŠ¶æ€ã€‚Jvmå¯¹æ ˆåªè¿›è¡Œä¸¤ç§æ“ä½œï¼šä»¥å¸§ä¸ºå•ä½çš„åŽ‹æ ˆå’Œå‡ºæ ˆæ“ä½œã€‚æˆ‘ä»¬çŸ¥é“ï¼ŒæŸä¸ªçº¿ç¨‹æ­£åœ¨æ‰§è¡Œçš„æ–¹æ³•ç§°ä¸ºæ­¤çº¿ç¨‹çš„å½“å‰æ–¹æ³•ï¼Œæˆ‘ä»¬å¯èƒ½ä¸çŸ¥é“ï¼Œå½“å‰æ–¹æ³•ä½¿ç”¨çš„å¸§ç¨‹åºå½“å‰å¸§ã€‚å½“çŽ°æˆæ¿€æ´»ä¸€ä¸ªJavaæ–¹æ³•ï¼ŒJVMå°±ä¼šåœ¨çº¿ç¨‹çš„Javaå †æ ˆé‡Œæ–°é›…èŒ¹ä¸€ä¸ªå¸§ï¼Œè¿™ä¸ªå¸§è‡ªç„¶æˆä¸ºäº†å½“å‰å¸§ã€‚åœ¨æ­¤æ–¹æ³•æ‰§è¡ŒæœŸé—´ï¼Œè¿™ä¸ªå¸§å°†ç”¨æ¥ä¿å­˜å‚æ•°ï¼Œå±€éƒ¨å˜é‡ï¼Œä¸­é—´è®¡ç®—è¿‡ç¨‹å’Œå…¶ä»–æ•°æ®ã€‚ä»ŽJavaçš„è¿™ç§åˆ†é…æœºåˆ¶æ¥çœ‹ï¼Œå †æ ˆåˆå¯ä»¥è¿™æ ·ç†è§£ï¼šæ ˆï¼ˆStackï¼‰æ˜¯æ“ä½œç³»ç»Ÿåœ¨å»ºç«‹æŸä¸ªè¿›ç¨‹æˆ–è€…çº¿ç¨‹ï¼Œï¼ˆåœ¨æ”¯æŒå¤šå…ˆæµ‹å¾ˆéš¾è¿‡çš„æ“ä½œç³»ç»Ÿä¸­æ˜¯çº¿ç¨‹ï¼‰ä¸ºè¿™ä¸ªçº¿ç¨‹ç®€åŽ†ä¸€ä¸ªå‚¨å­˜å…¶ä½™ï¼Œè¯¥åŒºåŸŸå…·æœ‰å…ˆè¿›å…ˆå‡ºçš„ç‰¹å¾ã€‚å…¶ç›¸å…³è®¾ç½®å‚æ•°ï¼š
+-Xss -- è®¾ç½®æ–¹æ³•æ ˆçš„æœ€å¤§å€¼
 
-2.1¡¢±¾µØ·½·¨Õ»£¨Native Stack£©: ´æ´¢±¾µØ·½·¨µÄµ÷ÓÃ×´Ì¬
+2.1ã€æœ¬åœ°æ–¹æ³•æ ˆï¼ˆNative Stackï¼‰: å­˜å‚¨æœ¬åœ°æ–¹æ³•çš„è°ƒç”¨çŠ¶æ€
 
-2¡¢·½·¨Çø£¨Method Area£©£ºµ±ÐéÄâ»ú×°ÔØÒ»¸öclassÎÄ¼þÊ±£¬Ëü»á´ÓÕâ¸öclassÎÄ¼þ°üº¬µÄ¶þ½øÖÆÊý¾ÝÖÐ½âÎöÀàÐÍÐÅÏ¢£¬È»ºó°ÑÕâÐ©ÀàÐÍÐÅÏ¢£¨°üÀ¨ÀàÐÅÏ¢£¬³£Á¿ÐÅÏ¢£¬¾²Ì¬±äÁ¿µÈ£©·ÅÈë·½·¨ÇøÕ»£¬¸ÄÄÚ´æÇøÓò±»ËùÓÐµÄÏß³Ì¹²Ïí¡£±¾µØ·½·¨ÇøÖÐ´æÔÚÒ»¿éÌØÊâµÄÄÚ´æÇøÓò£¬½Ð³£Á¿³Ø£¨Constant Pool£©,Õâ¿éÄÚ´æ½«ÓÚStringÀàÐÍµÄ·ÖÎöÃÜÇÐÏà¹Ø¡£
+2ã€æ–¹æ³•åŒºï¼ˆMethod Areaï¼‰ï¼šå½“è™šæ‹Ÿæœºè£…è½½ä¸€ä¸ªclassæ–‡ä»¶æ—¶ï¼Œå®ƒä¼šä»Žè¿™ä¸ªclassæ–‡ä»¶åŒ…å«çš„äºŒè¿›åˆ¶æ•°æ®ä¸­è§£æžç±»åž‹ä¿¡æ¯ï¼Œç„¶åŽæŠŠè¿™äº›ç±»åž‹ä¿¡æ¯ï¼ˆåŒ…æ‹¬ç±»ä¿¡æ¯ï¼Œå¸¸é‡ä¿¡æ¯ï¼Œé™æ€å˜é‡ç­‰ï¼‰æ”¾å…¥æ–¹æ³•åŒºæ ˆï¼Œæ”¹å†…å­˜åŒºåŸŸè¢«æ‰€æœ‰çš„çº¿ç¨‹å…±äº«ã€‚æœ¬åœ°æ–¹æ³•åŒºä¸­å­˜åœ¨ä¸€å—ç‰¹æ®Šçš„å†…å­˜åŒºåŸŸï¼Œå«å¸¸é‡æ± ï¼ˆConstant Poolï¼‰,è¿™å—å†…å­˜å°†äºŽStringç±»åž‹çš„åˆ†æžå¯†åˆ‡ç›¸å…³ã€‚
 
-3¡¢¶Ñ£¨Heap£©:  ¶ÑÊÇÐéÄâ»úËù¹ÜÀíµÄÄÚ´æÖÐ×î´óÒ»¿é¡£Java ¶ÑÊÇËùÓÐÏß³Ì¹²ÏíµÄÒ»¿éÄÚ´æÇøÓò¡£ÔÚ´ËÇøÓòµÄÎ¨Ò»Ä¿µÄ¾ÍÊÇ´æ·ÅÊµÀý£¬¼¸ºõËùÓÐµÄ¶ÔÏóÊµÀý¶¼ÊÇÔÚÕâÀï·ÖÅäÄÚ´æ£¬µ«ÊÇÔÚÕâ¸ö¶ÔÏóµÄÒýÓÃÈ´ÊÇÔÚÕ»£¨Stack£©ÖÐ·ÖÅä£¬Òò´ËÖ´ÐÐString s = new String ("s"), ÐèÒª´ÓÁ½¸öµØ·½·ÖÅäÄÚ´æ£ºÔÚ¶ÑÖÐÎªString¶ÔÏó·ÖÅäÄÚ´æ¡£ÔÚÕ»ÖÐÎªÒýÓÃ£¨Õâ¸ö¶Ñ¶ÔÏóµÄÄÚ´æµØÖ·£¬¼´Ö¸Õë£©·ÖÅäÄÚ´æ
+3ã€å †ï¼ˆHeapï¼‰:  å †æ˜¯è™šæ‹Ÿæœºæ‰€ç®¡ç†çš„å†…å­˜ä¸­æœ€å¤§ä¸€å—ã€‚Java å †æ˜¯æ‰€æœ‰çº¿ç¨‹å…±äº«çš„ä¸€å—å†…å­˜åŒºåŸŸã€‚åœ¨æ­¤åŒºåŸŸçš„å”¯ä¸€ç›®çš„å°±æ˜¯å­˜æ”¾å®žä¾‹ï¼Œå‡ ä¹Žæ‰€æœ‰çš„å¯¹è±¡å®žä¾‹éƒ½æ˜¯åœ¨è¿™é‡Œåˆ†é…å†…å­˜ï¼Œä½†æ˜¯åœ¨è¿™ä¸ªå¯¹è±¡çš„å¼•ç”¨å´æ˜¯åœ¨æ ˆï¼ˆStackï¼‰ä¸­åˆ†é…ï¼Œå› æ­¤æ‰§è¡ŒString s = new String ("s"), éœ€è¦ä»Žä¸¤ä¸ªåœ°æ–¹åˆ†é…å†…å­˜ï¼šåœ¨å †ä¸­ä¸ºStringå¯¹è±¡åˆ†é…å†…å­˜ã€‚åœ¨æ ˆä¸­ä¸ºå¼•ç”¨ï¼ˆè¿™ä¸ªå †å¯¹è±¡çš„å†…å­˜åœ°å€ï¼Œå³æŒ‡é’ˆï¼‰åˆ†é…å†…å­˜
 
-  Java ÐéÄâ»úÓÐÒ»ÌìÔÚ¶ÑÖÐ·ÖÅäÐÂ¶ÔÏóµÄÖ¸Áî£¬È´Ã»ÓÐÊÍ·ÅÄÚ´æµÄÖ¸Áî£¬ÕýÈçÄãÎÞ·¨Ê¹ÓÃJava´úÂëÈ¥Ã÷È·ÊÍ·ÅÒ»¸öµÄ¶ÔÏó£¬ÐéÄâ»ú×Ô¼º¸ºÔð¾ö¶¨ÈçºÎÒÔ¼°ºÎÊ±ÊÍ·Å²»ÔÚ±»ÔËÐÐµÄ³ÌÐòÒýÓÃµÄ³ÌÐòÒýÓÃµÄ¶ÔÏóËùÕ¼¾ÝµÄÄÚ´æ£¬Í¨³££¬ÐéÄâ»ú°ÑÕâ¸öÈÎÎñ½»¸øÀ¬»øÊÕ¼¯Æ÷£¨Garbage Collection£©. ÆäÏà¹ØÉèÖÃ²ÎÊý£º
-  -Xms -- ÉèÖÃ¶ÑÄÚ´æ³õÊ¼»¯´óÐ¡
-  -Xms -- ÉèÖÃ¶ÑÄÚ´æ×î´óÖµ
-  -XX:MaxTenuringTreshold -- ÉèÖÃ¶ÔÏóÔÚÐÂÉú´úÖÐ´æ»îµÄ´ÎÊý
-  -XX:PretenureSizeTreshold -- ÉèÖÃ²Ý¹ûÖ¸¶¨´óÐ¡µÄ´ó¶ÔÏóÖ±½Ó·ÖÅäÔÚÄêÀÏ´úÖÐ
+  Java è™šæ‹Ÿæœºæœ‰ä¸€å¤©åœ¨å †ä¸­åˆ†é…æ–°å¯¹è±¡çš„æŒ‡ä»¤ï¼Œå´æ²¡æœ‰é‡Šæ”¾å†…å­˜çš„æŒ‡ä»¤ï¼Œæ­£å¦‚ä½ æ— æ³•ä½¿ç”¨Javaä»£ç åŽ»æ˜Žç¡®é‡Šæ”¾ä¸€ä¸ªçš„å¯¹è±¡ï¼Œè™šæ‹Ÿæœºè‡ªå·±è´Ÿè´£å†³å®šå¦‚ä½•ä»¥åŠä½•æ—¶é‡Šæ”¾ä¸åœ¨è¢«è¿è¡Œçš„ç¨‹åºå¼•ç”¨çš„ç¨‹åºå¼•ç”¨çš„å¯¹è±¡æ‰€å æ®çš„å†…å­˜ï¼Œé€šå¸¸ï¼Œè™šæ‹ŸæœºæŠŠè¿™ä¸ªä»»åŠ¡äº¤ç»™åžƒåœ¾æ”¶é›†å™¨ï¼ˆGarbage Collectionï¼‰. å…¶ç›¸å…³è®¾ç½®å‚æ•°ï¼š
+  -Xms -- è®¾ç½®å †å†…å­˜åˆå§‹åŒ–å¤§å°
+  -Xms -- è®¾ç½®å †å†…å­˜æœ€å¤§å€¼
+  -XX:MaxTenuringTreshold -- è®¾ç½®å¯¹è±¡åœ¨æ–°ç”Ÿä»£ä¸­å­˜æ´»çš„æ¬¡æ•°
+  -XX:PretenureSizeTreshold -- è®¾ç½®è‰æžœæŒ‡å®šå¤§å°çš„å¤§å¯¹è±¡ç›´æŽ¥åˆ†é…åœ¨å¹´è€ä»£ä¸­
 
-4¡¢Java¶ÑÊÇÀ¬»øÊÕ¼¯¹ÜÀíµÄÖ÷ÒªÇøÓò£¬Òò´ËÓÖ³ÆÎª¡°GC ¶Ñ¡±£¨Garbage Collectioned Heap)£¬ÏÖÔÚµÄÀ¬»øÊÕ¼¯Æ÷»ù±¾¶¼ÊÇ²ÉÓÃ·Ö´øÊÕ¼¯·¨¡£ËùÒÔ Java ¶Ñ£¬¿ÉÒÔÏ¸·ÖÎª£ºÐÂÉú´ú(Young Generation)£¬ÄêÀÏ´ú(Old Generation) £¬ÈçÏÂÍ¼ËùÊ¾£¬·Ö´úÊÕ¼¯Ëã·¨µÄË¼Ïë£º
-Ò»ÖÖËµ·¨£¬Îª½Ï¸ßÆµÂÊ¶ÔÄêÇá´úµÄ¶ÔÏó£¨young generation£©½øÐÐÉ¨ÃèºÍ»ØÊÕ£¬ÕâÖÖ½Ð×öminor collection , ¶ø¶ÔÀÏ´ú¶ÔÏó£¨old generation£© µÄ½»²æ»ØÊÕÆµÂÊÒªµÍºÜ¶à¡£³ÆÎªmajor collection ¡£ÕâÑù¾Í²»ÐèÒªÃ¿´ÎGC¶¼½«ÄÚ´æÖÐËùÓÐ¶ÔÏó¶¼É¨ÃèÒ»±é¡£ÒÔ±ãÈÃ³ö¸ü¶àµÄÏµÍ³×ÊÔ´¹©Ó¦ÓÃÏµÍ³Ê¹ÓÃ¡£
-ÁíÒ»ÖÖÊé·¨£¬ÔÚ·ÖÅä¶ÀÏíÓöµ½ÄÚ´æ²»×ãÊ±£¬ÏÈ¶ÔÐÂÉú´ú½øÐÐGC£¨Young GC£©£»µ±ÐÂÉú´úGCÖ®ºóÒÀÈ»ÎÞ·¨Âú×ãÄÚ´æ¿Õ¼ä·ÖÅäÐèÇóÊ±£¬²Å»á¶ÔÕû¸ö¶Ñ¿Õ¼äÒÔ¼°·½·¨Çø½øÐÐGC£¨Full GC£©
+4ã€Javaå †æ˜¯åžƒåœ¾æ”¶é›†ç®¡ç†çš„ä¸»è¦åŒºåŸŸï¼Œå› æ­¤åˆç§°ä¸ºâ€œGC å †â€ï¼ˆGarbage Collectioned Heap)ï¼ŒçŽ°åœ¨çš„åžƒåœ¾æ”¶é›†å™¨åŸºæœ¬éƒ½æ˜¯é‡‡ç”¨åˆ†å¸¦æ”¶é›†æ³•ã€‚æ‰€ä»¥ Java å †ï¼Œå¯ä»¥ç»†åˆ†ä¸ºï¼šæ–°ç”Ÿä»£(Young Generation)ï¼Œå¹´è€ä»£(Old Generation) ï¼Œå¦‚ä¸‹å›¾æ‰€ç¤ºï¼Œåˆ†ä»£æ”¶é›†ç®—æ³•çš„æ€æƒ³ï¼š
+ä¸€ç§è¯´æ³•ï¼Œä¸ºè¾ƒé«˜é¢‘çŽ‡å¯¹å¹´è½»ä»£çš„å¯¹è±¡ï¼ˆyoung generationï¼‰è¿›è¡Œæ‰«æå’Œå›žæ”¶ï¼Œè¿™ç§å«åšminor collection , è€Œå¯¹è€ä»£å¯¹è±¡ï¼ˆold generationï¼‰ çš„äº¤å‰å›žæ”¶é¢‘çŽ‡è¦ä½Žå¾ˆå¤šã€‚ç§°ä¸ºmajor collection ã€‚è¿™æ ·å°±ä¸éœ€è¦æ¯æ¬¡GCéƒ½å°†å†…å­˜ä¸­æ‰€æœ‰å¯¹è±¡éƒ½æ‰«æä¸€éã€‚ä»¥ä¾¿è®©å‡ºæ›´å¤šçš„ç³»ç»Ÿèµ„æºä¾›åº”ç”¨ç³»ç»Ÿä½¿ç”¨ã€‚
+å¦ä¸€ç§ä¹¦æ³•ï¼Œåœ¨åˆ†é…ç‹¬äº«é‡åˆ°å†…å­˜ä¸è¶³æ—¶ï¼Œå…ˆå¯¹æ–°ç”Ÿä»£è¿›è¡ŒGCï¼ˆYoung GCï¼‰ï¼›å½“æ–°ç”Ÿä»£GCä¹‹åŽä¾ç„¶æ— æ³•æ»¡è¶³å†…å­˜ç©ºé—´åˆ†é…éœ€æ±‚æ—¶ï¼Œæ‰ä¼šå¯¹æ•´ä¸ªå †ç©ºé—´ä»¥åŠæ–¹æ³•åŒºè¿›è¡ŒGCï¼ˆFull GCï¼‰
 
-  4.1¡¢ÓÀ¾Ã´ú£¨Permanent Generation£©£¬´æ·ÅµÄ¶¼ÊÇÔÚJVM³õÊ¼»¯¼ÓÔØÆ÷¼ÓÔØµÄÒ»Ð©ÀàÐÅÏ¢£¨°üÀ¨ÀàÐÅÏ¢¡¢³£Á¿¡¢¾²Ì¬±äÁ¿µÈ£©ÕâÐ©ÐÅÏ¢µÄÉú´æÖÜÆÚ±È½Ï³¤£¬GC²»»áÔÚÖ÷³ÌÐòÔËÐÐÆÚ¶ÔPermGen Space ½øÐÐÇåÀí£¬ËùÒÔÈç¹ûÓ¦ÓÃÖÐÓÐºÜ¶àclassµÄ»°£¬¾ÍºÜÓÐ¿ÉÄÜ³öÏÖPermGen Space¡£Ïà¹Ø²ÎÊýÉèÖÃ£º
-   -XX:PemSize -- ÉèÖÃPermÇøµÄ³õÊ¼´óÐ¡
-   -XX:MaxPermSize -- ÉèÖÃPermÇøµÄ×î´óÖµ
+  4.1ã€æ°¸ä¹…ä»£ï¼ˆPermanent Generationï¼‰ï¼Œå­˜æ”¾çš„éƒ½æ˜¯åœ¨JVMåˆå§‹åŒ–åŠ è½½å™¨åŠ è½½çš„ä¸€äº›ç±»ä¿¡æ¯ï¼ˆåŒ…æ‹¬ç±»ä¿¡æ¯ã€å¸¸é‡ã€é™æ€å˜é‡ç­‰ï¼‰è¿™äº›ä¿¡æ¯çš„ç”Ÿå­˜å‘¨æœŸæ¯”è¾ƒé•¿ï¼ŒGCä¸ä¼šåœ¨ä¸»ç¨‹åºè¿è¡ŒæœŸå¯¹PermGen Space è¿›è¡Œæ¸…ç†ï¼Œæ‰€ä»¥å¦‚æžœåº”ç”¨ä¸­æœ‰å¾ˆå¤šclassçš„è¯ï¼Œå°±å¾ˆæœ‰å¯èƒ½å‡ºçŽ°PermGen Spaceã€‚ç›¸å…³å‚æ•°è®¾ç½®ï¼š
+   -XX:PemSize -- è®¾ç½®PermåŒºçš„åˆå§‹å¤§å°
+   -XX:MaxPermSize -- è®¾ç½®PermåŒºçš„æœ€å¤§å€¼
 
-  4.2¡¢ÐÂÉú´ú£¨Young Generation£©ÓÖ·ÖÎª£ºEdenÇøºÍSurvivorÇø£¬ Survivor Çø·ÖÎª From SpaceºÍ To Space. Eden ÇøÊÇ¶ÔÏó×î³õ·ÖÅäµ½µÄµØ·½£»Ä¬ÈÏÇé¿öÏÂ£¬Form Space ºÍ To Space µÄÇøÓò´óÐ¡ÏàµÈ¡£JVM½øÐÐ Minor GCÊ±£¬ ½«Eden ÖÐ»¹´æ»î¶ÔÏó¿½±´µ½Survivor ÇøÖÐ£¬»¹»á½«Survivor È¥ÖÐ»¹´æ»îµÄ¶ÔÏó¿½±´µ½Tenured ÇøÖÐ¡£ ÔÚÕâÖÖGC Ä£Ê½ÏÂ£¬JVM ÎªÁËÌáÉýGCÐ§ÂÊ¡£ ½«Survivor Çø·ÖÎªFrom Space ºÍTo Space ¡£ÕâÑù¾Í¿ÉÒÔ½«¶ÔÏó»ØÊÕºÍ¶ÔÏó½úÉý·ÖÀë³öÀ´¡£ÐÂÉú´úµÄ´óÐ¡ÉèÖÃÓÐ2¸ö²ÎÊý£º
-  -Xmn -- ÉèÖÃÐÂÉú´úÄÚ´æ´óÐ¡
-  -XX:SurvivorRatio -- ÉèÖÃEden Óë Survivor ¿Õ¼äµÄ´óÐ¡±ÈÀý
+  4.2ã€æ–°ç”Ÿä»£ï¼ˆYoung Generationï¼‰åˆåˆ†ä¸ºï¼šEdenåŒºå’ŒSurvivoråŒºï¼Œ Survivor åŒºåˆ†ä¸º From Spaceå’Œ To Space. Eden åŒºæ˜¯å¯¹è±¡æœ€åˆåˆ†é…åˆ°çš„åœ°æ–¹ï¼›é»˜è®¤æƒ…å†µä¸‹ï¼ŒForm Space å’Œ To Space çš„åŒºåŸŸå¤§å°ç›¸ç­‰ã€‚JVMè¿›è¡Œ Minor GCæ—¶ï¼Œ å°†Eden ä¸­è¿˜å­˜æ´»å¯¹è±¡æ‹·è´åˆ°Survivor åŒºä¸­ï¼Œè¿˜ä¼šå°†Survivor åŽ»ä¸­è¿˜å­˜æ´»çš„å¯¹è±¡æ‹·è´åˆ°Tenured åŒºä¸­ã€‚ åœ¨è¿™ç§GC æ¨¡å¼ä¸‹ï¼ŒJVM ä¸ºäº†æå‡GCæ•ˆçŽ‡ã€‚ å°†Survivor åŒºåˆ†ä¸ºFrom Space å’ŒTo Space ã€‚è¿™æ ·å°±å¯ä»¥å°†å¯¹è±¡å›žæ”¶å’Œå¯¹è±¡æ™‹å‡åˆ†ç¦»å‡ºæ¥ã€‚æ–°ç”Ÿä»£çš„å¤§å°è®¾ç½®æœ‰2ä¸ªå‚æ•°ï¼š
+  -Xmn -- è®¾ç½®æ–°ç”Ÿä»£å†…å­˜å¤§å°
+  -XX:SurvivorRatio -- è®¾ç½®Eden ä¸Ž Survivor ç©ºé—´çš„å¤§å°æ¯”ä¾‹
 
-  4.3¡¢ÀÏÄê´ú £¨Old Generation£©µ±OLD¿Õ¼ä²»¹»Ê±£¬JVM»áÔÚOLDÇø½øÐÐ major collection; ÍêÈ«À¬»øÊÕ¼¯ºó£¬ ÈôSurvivor¼°OLDÇøÈÎÈ»ÎÞ·¨´æ·Å´Ó Eden ¸´ÖÆ¹ýÀ´µÄ=²¿·Ö¶ÔÏó£¬µ¼ÖÂJVMÎÞ·¨ÔÚEden ÇøÎ¯ÐÂ¶ÔÏó´´½¨ÄÚ´æÇøÓò¡£Ôò³öÏÖ"Out of memory"
+  4.3ã€è€å¹´ä»£ ï¼ˆOld Generationï¼‰å½“OLDç©ºé—´ä¸å¤Ÿæ—¶ï¼ŒJVMä¼šåœ¨OLDåŒºè¿›è¡Œ major collection; å®Œå…¨åžƒåœ¾æ”¶é›†åŽï¼Œ è‹¥SurvivoråŠOLDåŒºä»»ç„¶æ— æ³•å­˜æ”¾ä»Ž Eden å¤åˆ¶è¿‡æ¥çš„=éƒ¨åˆ†å¯¹è±¡ï¼Œå¯¼è‡´JVMæ— æ³•åœ¨Eden åŒºå§”æ–°å¯¹è±¡åˆ›å»ºå†…å­˜åŒºåŸŸã€‚åˆ™å‡ºçŽ°"Out of memory"

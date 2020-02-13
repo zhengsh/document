@@ -1,12 +1,12 @@
-### RejectedExecutionException�쳣����
+### RejectedExecutionException异常处理
 
-#### һ���쳣���ܷ���
-ͨ����ThreadPoolExecutorler �ķ���������java.util.concurrent.RejectedExecutionException��Ҫ��2�����
-1.���̳߳���ʾ�ĵ���shutdown()֮�������̳߳����ύ�����ʱ����������õľܾ�������ThreadPoolExecutor.AbortPolicy��
-����쳣Ҳ�ᱻ�׳�����
+#### 一、异常可能分析
+通过对ThreadPoolExecutorler 的分析，引发java.util.concurrent.RejectedExecutionException主要有2种情况
+1.当线程池显示的调用shutdown()之后，再向线程池中提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy，
+这个异常也会被抛出来。
 
-2.������Ŷ��������Ϊ�н��޶��У����������˾ܾ��Ĳ���ΪThreadPoolExecutor.AbortPolicy, ���̴߳ε������ﵽ��
-maximumPoolSize��ʱ�����������ύ���񣬾ͻ��׳�RejectedExecutionException�쳣Դ������
+2.当你的排队任务策略为有界限队列，并且设置了拒绝的策略为ThreadPoolExecutor.AbortPolicy, 当线程次的数量达到了
+maximumPoolSize的时候，你再向它提交任务，就会抛出RejectedExecutionException异常源码如下
 ```java
 
 /**
@@ -35,9 +35,9 @@ public static class AbortPolicy implements RejectedExecutionHandler {
 ```
 
 
-#### ���������Ŀ����
+#### 二、结合项目分析
 
-1. �ڳ������̳߳����õ���������
+1. 在程序中线程池设置的配置如下
 ```java
 @Configuration
 public class MarketMessageConfig {
@@ -61,11 +61,11 @@ public class MarketMessageConfig {
     }
 }
 ```
-2. ��������̳߳��Ƕ�ʱ�������ύ�����õ������ܻ����һ����2000�����ϵ�������Ҫ������
+2. 由于这个线程池是定时任务重提交任务用到，可能会出现一次有2000条以上的数据需要处理。
 
-#### �����������
-1.��������maximumPoolSize����workQueue ���磺Integer.MAX_VALUE, ���˽��������еĴ�С����Ϊ�̳߳������̹߳����
-����CPU�л��ĳɱ��϶���������Ч�ʡ�
+#### 三、解决方案
+1.尽量调大maximumPoolSize或者workQueue 例如：Integer.MAX_VALUE, 个人建议调大队列的大小，因为线程池运行线程过多会
+导致CPU切换的成本上而降低运行效率。
 
 ```java
 public class MarketMessageConfig {

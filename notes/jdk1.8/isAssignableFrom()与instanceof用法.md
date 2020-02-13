@@ -1,25 +1,25 @@
-#### isAssignableFrom()·½·¨Óëinstanceof¹Ø¼ü×ÖÇø±ð\
-* Class.isAssignableFrom() ÊÇÓÃÀ´ÅÐ¶ÏClass1 ºÍÁíÒ»¸öÀà Class2 ÊÇ·ñÏàÍ¬»òÕßÊÇÁíÒ»¸öÀàµÄ¸¸Àà»òÕß½Ó¿Ú¡£
+#### isAssignableFrom()æ–¹æ³•ä¸Žinstanceofå…³é”®å­—åŒºåˆ«\
+* Class.isAssignableFrom() æ˜¯ç”¨æ¥åˆ¤æ–­Class1 å’Œå¦ä¸€ä¸ªç±» Class2 æ˜¯å¦ç›¸åŒæˆ–è€…æ˜¯å¦ä¸€ä¸ªç±»çš„çˆ¶ç±»æˆ–è€…æŽ¥å£ã€‚
 
 ```java
     A.class.isAssignableFrom(B.class)
 ```
-µ÷ÓÃÕßºÍ²ÎÊý¶¼ÊÇjava.lang.ClassÀàÐÍ£¬ÉÏÃæµÄÀý×ÓÈç¹û·µ»ØÎªtrue, Ôò±íÊ¾AÊÇBµÄ¸¸Àà»òÕß½Ó¿Ú£¬B¿ÉÒÔÊÇÒ»¸öÀà»òÕß½Ó¿Ú
+è°ƒç”¨è€…å’Œå‚æ•°éƒ½æ˜¯java.lang.Classç±»åž‹ï¼Œä¸Šé¢çš„ä¾‹å­å¦‚æžœè¿”å›žä¸ºtrue, åˆ™è¡¨ç¤ºAæ˜¯Bçš„çˆ¶ç±»æˆ–è€…æŽ¥å£ï¼ŒBå¯ä»¥æ˜¯ä¸€ä¸ªç±»æˆ–è€…æŽ¥å£
 
-* instanceof ÊÇÓÃÀ´ÅÐ¶ÏÒ»¸ö¶ÔÏóÊµÀýÊÇ·ñÊÇÒ»¸öÀà»ò½Ó¿Ú¶î»òÕßÆä×ÓÀà½Ó¿ÚµÄÊµÀý¡£
+* instanceof æ˜¯ç”¨æ¥åˆ¤æ–­ä¸€ä¸ªå¯¹è±¡å®žä¾‹æ˜¯å¦æ˜¯ä¸€ä¸ªç±»æˆ–æŽ¥å£é¢æˆ–è€…å…¶å­ç±»æŽ¥å£çš„å®žä¾‹ã€‚
 
 ```java
     o instanceof TypeName
 ```
-µÚÒ»¸ö²ÎÊýÊÇ¶ÔÏóÊµÀýÃû£¬µÚ¶þ¸ö²ÎÊýÊÇ¾ßÌåµÄÀàÃû»òÕß½Ó¿ÚÃû
+ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯å¯¹è±¡å®žä¾‹åï¼Œç¬¬äºŒä¸ªå‚æ•°æ˜¯å…·ä½“çš„ç±»åæˆ–è€…æŽ¥å£å
 
-* isInstance() ·½·¨£¬ÓÃÀ´¼ì²éÊµÀý
+* isInstance() æ–¹æ³•ï¼Œç”¨æ¥æ£€æŸ¥å®žä¾‹
 ```java
     C.class.isInstance(b)
 ``` 
-Èç¹û·µ»Øtrue£¬ Ôò±íÊ¾b ÊÇCµÄÊµÀý»òÕß×ÓÀà
+å¦‚æžœè¿”å›žtrueï¼Œ åˆ™è¡¨ç¤ºb æ˜¯Cçš„å®žä¾‹æˆ–è€…å­ç±»
 
-#### ÍêÕûÀý×Ó
+#### å®Œæ•´ä¾‹å­
 
 ```java
 public class MyTest1 {
@@ -55,7 +55,7 @@ public class MyTest1 {
 
 ```
 
-Êä³ö½á¹û:
+è¾“å‡ºç»“æžœ:
 
     1
     2

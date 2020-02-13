@@ -1,4 +1,4 @@
-1¡¢¶ÔÏóµÄhashCode ·½·¨²»±»µ±Ç°ÊµÁ¦¶ÔÏóÖØĞ´µÄÊ±ºò£¬µÄhashcode ÖµºÍµ±Ç°¶ÔÏóÈ¥µ÷ÓÃ
-System.identityHashCode(obj) µÄ½á¹ûÏàÍ¬
-2¡¢Èç¹ûÖØĞ´hashCode ·½·¨£¬ÄÇÃ´µ±Ç°Object Êä³öµÄhashCode ÖµÎª·½·¨·µ»ØÖµ£¬System.identityHashCode(obj) ÒÀÈ»·µ»ØÖ®Ç°µÄÖµ¡£
-3¡¢identityHashCode ·½·¨ÊÇÊôÓÚSystem ÀàµÄ¾²Ì¬·½·¨µ÷ÓÃµÄÊÇ£¬JVMµÄ±¾µØ·½·¨JVM_IHashCode
+1ã€å¯¹è±¡çš„hashCode æ–¹æ³•ä¸è¢«å½“å‰å®åŠ›å¯¹è±¡é‡å†™çš„æ—¶å€™ï¼Œçš„hashcode å€¼å’Œå½“å‰å¯¹è±¡å»è°ƒç”¨
+System.identityHashCode(obj) çš„ç»“æœç›¸åŒ
+2ã€å¦‚æœé‡å†™hashCode æ–¹æ³•ï¼Œé‚£ä¹ˆå½“å‰Object è¾“å‡ºçš„hashCode å€¼ä¸ºæ–¹æ³•è¿”å›å€¼ï¼ŒSystem.identityHashCode(obj) ä¾ç„¶è¿”å›ä¹‹å‰çš„å€¼ã€‚
+3ã€identityHashCode æ–¹æ³•æ˜¯å±äºSystem ç±»çš„é™æ€æ–¹æ³•è°ƒç”¨çš„æ˜¯ï¼ŒJVMçš„æœ¬åœ°æ–¹æ³•JVM_IHashCode
