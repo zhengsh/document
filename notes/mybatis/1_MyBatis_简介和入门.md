@@ -111,7 +111,7 @@ try (SqlSession session = sqlSessionFactory.openSession()) {
 ```
 * 诚然，这种方式能能够正常工作， 并且对于使用旧版本的 MyBatis 的用户来说也比较熟悉。不过现在有一种更加简洁的方式 --使用正确面熟每个语句的
 参数和返回值的接口（比如：BlogMapper.class）, 你现在不仅可以执行更清晰和安全类型的代码，而且还不用担心易错的字符串字面值以及强制类型转换
-```
+```java
 try (SqlSession session = sqlSessionFactory.openSession()) {
     BlogMapper blogMapper = session.getMapper(BlogMapper.class);
     BlogDTO blog = blogMapper.get("102");
@@ -148,13 +148,13 @@ try (SqlSession session = sqlSessionFactory.openSession()) {
 * 为了这个简单的例子我们，似乎写了不少配置。在一个 XML 映射文件中，可以定义无数个映射语句，这样一来， XML 头部和文档类型申明占去的部分就显得
 微不足道了，而文件的剩余部分具备自解释性，很容易理解。在命名空间 "cn.edu.cqvie.mybatis.mapper.BlogMapper"  中定义了一个
 名为 "get" 的映射语句，允许你指定完全限定名来调用映射语句，就像前面的例子一样
-```
+```java
 BlogDTO blog = (BlogDTO)session.selectOne("cn.edu.cqvie.mybatis.mapper.BlogMapper.get", 102);
 ```
 
 * 你可能注意到这和使用完全限定名调用 Java 对象的个方法类似。 这样，该命名就可以直接映射到命名空间中同名的 Mapper 类， 并将已映射的 select 
 语句中的名字、参数、返回类型匹配成方法。因此你就可以像上面那样很容易地调用这个对应的 Mapper 接口的方法，就像下面这样
-```
+```java
 BlogMapper blogMapper = session.getMapper(BlogMapper.class);
 BlogDTO blog = blogMapper.get("102");
 ```
@@ -207,7 +207,7 @@ public interface BlogMapper {
   比如 Servlet 框架中的 HttpSession. 如果你现在正在使用一种 Web 框架，考虑 SqlSession 放在一个 HTTP 请求对象相似的作用域中。换句话说。
   每次收到的 HTTP请求，就可以打开一个 SqlSession, 返回一个响应，就关闭它。这个关闭操作是很重要的，你应该把这个关闭操作放到 finally 块
   中确保每次都能执行关。喜爱按的示例就是一个确保SqlSession 关闭的标准模式。
-  ```
+  ```java
   try (SqlSession session = sqlSessionFactory.openSession()) {
       //你的应用逻辑代码
   }
@@ -218,7 +218,7 @@ public interface BlogMapper {
   们的SqlSession 相同的。尽管如此，映射器实例的最佳作用域是方法作用域。也就是说，映射器实例应该在调用他们的方法中被请求，用过之后即可丢弃。
   并不需要显示地关闭映射实例，尽管在整个请求作用域保持映射器实例也不会有什么问题，但是你回发现，像SqlSession 一样，在这个作用域上管理
   太多的资源的话会难于控制。为了变这种复杂性，最好把樱色器放在方法作用域内。下面的例子就展示了这个事件：
-  ```
+  ```java
   try (SqlSession session = sqlSessionFactory.openSession()) {
       BlogMapper mapper = session.getMapper(BlogMapper.class);
       //你的应用逻辑代码
