@@ -6,13 +6,13 @@ SQL 映射文件只有很少的的几个（按照被定义的顺序列出）
   * cache - 对给定命名空间的缓存配置
   * cache-ref - 对给定的命名空间缓存配置的引用
   * resultMap - 是最复杂也是最强大的元素，用来描述如何从数据库结果集中来加载对象
-  * sql - 可被其他语句引用的可重用语句块
+  * <a href="sql">sql - 可被其他语句引用的可重用语句块</a>
   * insert - 映射插入语句
   * update - 映射更新语句
   * delete - 映射删除语句
-  * select - 映射查询语句
+  * <a href="select">select - 映射查询语句</a>
 
-### select 
+### <a name="select">select </a>
 * 查询语句是最长用的元素之一，是用来查询数据。它复杂的点在于查询结果集的映射，但是经过MyBaits 的处理一切都变得非常的简单，比如：
 ```xml
 <select id="findById"  parametreType="int" resultType="blog">
@@ -106,12 +106,90 @@ ps.setInt(1, id);
     delete from blog where id = #{id}
 </delete>
 ```
+* 如上所示插入的配置规则更加风戽，在插入语句里面有一些额外的属性和子元素用来处理主键生成，而且有多种方式生成。
+* 如果数据库支持自动生成主键字段（比如 MySQL 和 SqlServer），那么我们可以设置 useGeneratedKeys="true" 
+keyProperty="id" 如果 Blog 表已经使用了id 自动生成的列，可以将语句修改为
+```xml
+<insert id="insert" parameterType="blog" useGeneratedKeys="true" keyProperty="id">
+    insert into blog (`id`, `name`, `title`, `content`)
+    values (#{id}, #{name}, #{title}, #{content})
+</insert>
+```
+* 如果需要插入多列可以传入一个数组或者集合，并且返回自动生成的主键列
+```xml
+<insert id="batchInsert" parameterType="blog" useGeneratedKeys="true" keyProperty="id">
+    insert into blog (`id`, `name`, `title`, `content`) values 
+    <foreach item="item" collection="list" separator=",">
+        (#{id}, #{name}, #{title}, #{content})
+    </foreach>
+</insert>
+```
+* 对于不支持自动生成的数据库或不能支持自动生成主键的JDBC驱动， MyBatis 有另外一种方法来生成主键
+* 下面有一个简单的案例，**本处的主键生成策略只是作为演示在实际中是不可取的**。
+```xml
+<insert id="batchInsert" parameterType="blog" useGeneratedKeys="true" keyProperty="id">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+    select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
+    </selectKey>
+    insert into blog (`id`, `name`, `title`, `content`) values 
+    <foreach item="item" collection="list" separator=",">
+        (#{id}, #{name}, #{title}, #{content})
+    </foreach>
+</insert>
+```
+* 如果我们需要在**数据写入数据库后，获取主键ID**也可以通过如下方式实现（MySQL 数据库）
+```xml
+<insert id="insert" parameterType="blog">
+    <selectKey resultType="int" keyProperty="id" order="AFTER">
+        select last_insert_id()
+    </selectKey>
+    insert into blog (`id`, `name`, `title`, `content`)
+    values (#{id}, #{name}, #{title}, #{content})
+</insert>
+```
+* selectKey 元素描述如下:
+```xml
+<selectKey
+    keyProperty="id" //被设置或者被获取值的目标属性，如果希望得到多个列，用英文逗号分隔属性名称列表
+    resultType="int" //匹配属性的返回结果集中的列名称，如果希望得到多个列，用英文逗号分隔属性名称列表
+    order="BEFORE"
+    statementType="PREPARED"
+>
+```
 
-### sql
+### <a name="sql">sql</a>
+* 这个元素可以用来定义可重用的SQL代码段，这些SQL代码可以被包含在其他语句中。它可以（在加载的时候）被静态地设置参数。
+在不同的包含语句中可以设置不同的值到占位符上。比如：
+```xml
+<sql id="defaultSelect">
+    select * from blog
+</sql>
+```
+* 这个片段可以用在别的语句中，如：
+```xml
+ <!-- 查询全部 -->
+<select id="findAll" resultType="blogDto">
+    <include refid="defaultSelect"></include>
+    <!-- select * from blog -->
+</select>
+```
+* 添加属性值在 include 元素的 refid 属性中，可以**传递参数**
+```xml
+<sql id="defaultSelect">
+    select * from ${alias}
+</sql>
+
+
+<select id="findAll" resultType="blogDto">
+    <include refid="defaultSelect">
+        <property name="alias" value="blog"></property>
+    </include>
+</select>
+```
 
 ### 参数
 
-### 结果映射
+### 结果集映射
 
 ### 自动映射
 
