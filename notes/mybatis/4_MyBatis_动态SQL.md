@@ -5,10 +5,10 @@
 
 * 动态SQL元素的 JSTL 或基于 XML的文本处理器相似。 在MyBatis 之前版本中，有很多元素需要花时间了解。 MyBatis 3 大大的精简了元素种类，现在只需要学习以前的一半元素即可。MyBatis 采用功能更加强大的基于 OGNL的表达式来淘汰大部分元素
 
-  * <a href="if">if</a>
-  * <a href="choose">choose (when, otherwise)</a>
-  * <a href="trim">trim(where, set)</a>
-  * <a href="foreach">foreach</a>
+  * <a href="if"> if </a>
+  * <a href="choose"> choose (when, otherwise) </a>
+  * <a href="trim"> trim(where, set) </a>
+  * <a href="foreach"> foreach </a>
 
 ### <a name="if">if</a>
 动态SQL通常要做的事情是更具条件包含where子句的一部分。比如：
@@ -127,7 +127,7 @@ select * from blog where and `title` like 'someTitle'
 </trim>
 ```
 
-### <a name="foreach">foreach</a>
+### <a name="foreach"> foreach </a>
 * 动态SQL的另外一个常用的操作需求是对一个集合进行遍历，通常是在构建 IN 条件语句的时候。比如
 ```xml
 <!-- 根据VO中的ID集合来查询列表 -->
