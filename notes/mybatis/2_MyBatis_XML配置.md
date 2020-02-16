@@ -197,3 +197,6 @@ public class ExampleObjectFactory extends DefaultOBjectFactory {
     <mapper class="cn.edu.cqvie.example.mapper.AuthorMapper"/>
 </mappers>
 ```
+
+
+[MyBatis XML 文件映射 (next)](https://github.com/zhengsh/document/blob/master/notes/mybatis/3_MyBatis_XML%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6.md "MyBatis XML 文件映射")

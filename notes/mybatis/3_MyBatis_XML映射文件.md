@@ -234,3 +234,4 @@ keyProperty="id" 如果 Blog 表已经使用了id 自动生成的列，可以将
 
 * **二级缓存是事务性的， 这意味着，当SqlSession 完成并提交时，或是完成并回滚，但没有执行 flushCache=true 的 insert/update/delete 语句时，缓存会获得更新**
 
+[MyBatis 动态SQL (next)](https://github.com/zhengsh/document/blob/master/notes/mybatis/4_MyBatis_%E5%8A%A8%E6%80%81SQL.md "MyBatis 动态SQL")

@@ -232,3 +232,6 @@ public interface Mapper {
 * **可以将 Apache Velocity 作为动态语言来使用，跟多的细节 可以参考 MyBatis-Velocity**
 * 在咱们之前所看到的所有的 xml 标签都是默认由 MyBatis 语言提供的， 而它由别名为 xml 的语言驱动器 
 org.apache.ibatis.scripting.xmltags.XMLLanguageDriver 所提供。
+
+
+[MyBatis JAVA API (next)](https://github.com/zhengsh/document/blob/master/notes/mybatis/5_Mybatis_Java_API.md "MyBatis JAVA API")

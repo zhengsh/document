@@ -225,3 +225,4 @@ public interface BlogMapper {
   }
   ```
   
+[MyBatis XML 配置 (next)](https://github.com/zhengsh/document/blob/master/notes/mybatis/2_MyBatis_XML%E9%85%8D%E7%BD%AE.md "MyBatis XML 配置")
