@@ -10,8 +10,7 @@
 5. 方法区(Method Area): 存储元数据信息。永久代 (Permanent Generation) 从JDK1.8开始彻底废弃永久代，
 使用元空间(Meta Space)来替代。
 6. 运行时常量池：方法区的一部分内容。
-7. 直接内存： Direct Memory, 堆外内存，不是由JVM来管理，是通过操作系统来管理的。与Java NIO密切相关的。Java 通过DirectByteBuffer来
-操作直接内存。
+7. 直接内存： Direct Memory, 堆外内存，不是由JVM来管理，是通过操作系统来管理的。与Java NIO密切相关的。Java 通过DirectByteBuffer来操作直接内存。
 
 #### Java对象的创建过程
 
