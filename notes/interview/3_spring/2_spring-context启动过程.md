@@ -20,9 +20,7 @@ compile 'javax.inject:javax.inject:1'
 
 ### Spring 容器过程
 
-我们可以通过``AnnotationConfigApplicationContext``传入 ``Config``配置类来初始化Spring 的上下文对象，那么咱们就来通过阅读源码来分析在 ``new AnnotationConfigApplicationContext(Config.class)``这个创建 ``ApplicationContext`过程中到底为咱们做了那些事情。
-
-初始化上下文
+初始化上下文可以通过下面的一行代码来初始化容器。下面简述Spring容器在启动过程中的主要流程，具体的执行过程可以在看我的 github 中自己编译的  [spring 源码](https://github.com/zhengsh/spring-framework.git) 中的注释说明。
 
 ```java
  ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
@@ -32,7 +30,7 @@ compile 'javax.inject:javax.inject:1'
    1. XML 注册 bean: ``<bean />``。
    2. 注解注册 bean: @Service 、@Component 、@Bean。
 
-2. Spring 容器会在适合的时机创建Bean。
+2. Spring 容器会在适合的时机创建 bean 。
    1. 用到这个 bean 的时候：利用 getBean () 创建 bean ; 创建好以后保存在容器中。
    2. 统一创建剩下的所有 bean 的时候: finishBeanFactoryInitialization()。
 
@@ -51,6 +49,8 @@ compile 'javax.inject:javax.inject:1'
    ``ApplicationListener``： 事件监听；
 
    ``ApplicationEventMulticaster`` ：事件派发;
+   
+   
 
 ### Spring 初始化容器实例代码
 
