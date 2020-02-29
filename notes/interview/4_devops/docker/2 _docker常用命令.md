@@ -58,6 +58,23 @@ docker ps -a
 docker search java
 ```
 
+* rmi 删除镜像
+
+```powershell
+# 查询所有镜像
+docker images
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ssm_nginx           latest              7f48053b7f39        11 minutes ago      127MB
+nginx               latest              a1523e859360        2 days ago          127MB
+
+# 删除镜像
+docker rmi nginx:latest
+
+Untagged: nginx:latest
+Untagged: nginx@sha256:380eb808e2a3b0dd954f92c1cae2f845e6558a15037efefcabc5b4e03d666d03
+```
+
 * 镜像的构建
 
 ```shell
