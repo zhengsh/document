@@ -1,6 +1,10 @@
 # Docker 构建 MySQL 主从架构
 
-### 配置mysql-cluster配置
+### mysql-cluster 架构图
+
+<img src="../../../images/interview/mysql/mysql-cluster-atlas.png" alt="avatar" style="zoom:80%;" />
+
+### mysql-cluster配置
 
 * ``master`` 节点 ``my.cnf`` 配置
 
