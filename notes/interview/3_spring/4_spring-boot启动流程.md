@@ -10,8 +10,6 @@
 </dependency>
 ```
 
-
-
 ### spring boot 启动过程
 
 ![spring-boot-start](../../images/interview/spring/spring-boot-start.png)
