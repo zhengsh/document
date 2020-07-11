@@ -2,10 +2,10 @@
 
 
 #### execute 方法
- 
+
  分析ThreadPoolExecutor的执行原理， 直接从execute 方法开始。
- 
-```
+
+```java
 public void execute(Runnbale command) {
     if (commond == null) {
         throw new NullPointerException()
@@ -50,19 +50,19 @@ public void execute(Runnbale command) {
 整体判断流出如下图所示
 
 ![avatar](images/jdk/concurrent/1.png)
- 
+
 #### addWorker 方法
 
 在execute 方法中，用到了 double-check 的思想， 我们看到上述代码并没有同步控制都是基于
 乐观锁的check , 如果任务可以创建则进入andWorker(Runnable firestTask, boolean core) 方法，注意上述代码中的三种方式：
-  
+
   * andWorker(command, true): 创建核心线程执行任务
   * andWorker(command, false): 创建非核心线程任务
   * andWorker(null, false): 创建非核心线程，当前任务为空
-  
+
 andWorker 的返回值是 boolean, 不保证操作成功，下面具体时间 andWorker 方法如下:
-   
-```
+
+```java
 
 private boolean andWorker(Runable firestTask, boolean core) {
     retry:

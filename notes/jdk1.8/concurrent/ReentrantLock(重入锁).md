@@ -14,7 +14,7 @@
 此方法就可以获得成功
 
 * 典型的代码建议
-```
+```java
     class X {
         private final ReentrantLock lock = new ReentrantLock();
         // ....
@@ -67,7 +67,7 @@
         }
         return false;
     }
-    
+
 2.释放锁
 
 
@@ -127,8 +127,9 @@
         }
         return false;
     }
-    
-    
+
+
+​    
 区别：
 
 1. 公平锁每次获取得到锁为同步队列中的第一个节点，**保证请求资源时间上的绝对顺序**， 而非公平锁有可能刚释放的锁线程下次继续获取该锁，

@@ -95,7 +95,7 @@ public class CLHLock {
 
 ### MCS 锁
   MSC (John Mellor-Crummey and Michael Scott)与CLH最大的不同并不是链表是隐式还是显式，而是线程自选的规则不同：CLH是在前驱节点额locked
-域上自旋转等待，而MCS在自己的节点上locked域上自选等待。正是如此，它解决了CLH在NUMA系统架构中获取locked域状态内存过远的问题。
+域上自旋转等待，而MCS在自己的节点上locked域上自旋等待。正是如此，它解决了CLH在NUMA系统架构中获取locked域状态内存过远的问题。
 
 MCS锁具体实现规则：
 1. 队列初始化没有节点，taIl = null
