@@ -22,7 +22,7 @@
 
 # DevOps 入门实践
 
-* [**Kubernetes 高可用架构** )](https://github.com/zhengsh/document/tree/master/notes/service-mesh "Kubernetes")
+* [**Kubernetes 高可用架构**](https://github.com/zhengsh/document/tree/master/notes/service-mesh "Kubernetes")
 
 # 其他
 
