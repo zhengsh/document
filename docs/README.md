@@ -20,6 +20,10 @@
 
 * [**Spring Boot** 启动过程(持续更新中)](https://github.com/zhengsh/document/tree/master/notes/spring/boot "Spring Boot")
 
+# DevOps 入门实践
+
+* [**Kubernetes 高可用架构** )](https://github.com/zhengsh/document/tree/master/notes/service-mesh "Kubernetes")
+
 # 其他
 
 * [**💻&nbsp;&nbsp;MySQL 索引优化**](https://github.com/zhengsh/document/blob/master/notes/other/mysql/%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96.MD "索引优化")
