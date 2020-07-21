@@ -1,0 +1,14 @@
+一、String字符串
+
+常量池（constant pool）指的是在编译期被确定，并被保存在编译的 .class 文件中的一些数据。他包括了关于类、方法、接口中的常量，也包括字符串常量。常量池还具备动态性，运行期可以将新的常量放入常量池中，String类的intern()方法是这一特征的典型应用。
+
+String 定义的三种方式
+
+1、使用关键字new，如：String s1 = new String("myString")
+2、直接定义，如： String s1 = "myString";
+3、串联声称曾，如： String s1 = "my" + “String”
+
+
+
+二、StringBuffer 和StringBuilder
+String , StringBuffer 和StringBuiler 在本质上都是字符数组，不同的是，在进行连接操作时，String每次返回一个String实例，而StringBuffer和StringBuilder的append方法直接返回this, 所以这就是为什么大连字符串链接运算，不推荐String， 而推荐StringBuffer 和StringBuilder。总结：在多线程环境可以使用StringBuffer进行字符串链接操作，单线程环境使用StringBuilder, 它的效率更高。
