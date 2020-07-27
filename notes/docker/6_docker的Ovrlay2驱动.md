@@ -12,7 +12,7 @@ OverlayFS是一种和AUFS很类似的文件系统，与AUFS相比，OverlayFS有
 
 下图是一个docker镜像和docke容器的分层图，docker镜像是lowdir，docker容器是upperdir。而统一的视图层是merged层
 
-<img src="../../../images/interview/devops/docker-overlay2.png" alt="HashMap-1.8-Hash" />
+<img src="./images/interview/devops/docker-overlay2.png" alt="HashMap-1.8-Hash" />
 
 ### 容器使用overlay读写
 
