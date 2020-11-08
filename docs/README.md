@@ -1,8 +1,8 @@
 # Java 基础
 
-* [**🚘&nbsp;&nbsp;Java 集合**](https://github.com/zhengsh/document/tree/master/notes/jdk1.8/collection "集合")
+* [**🚘&nbsp;&nbsp;Java 集合**](https://github.com/zhengsh/document/tree/master/notes/tips/jdk1.8/collection "集合")
 
-* [**🔋&nbsp;&nbsp;Java 线程**](https://github.com/zhengsh/document/tree/master/notes/jdk1.8/concurrent "线程")
+* [**🔋&nbsp;&nbsp;Java 线程**](https://github.com/zhengsh/document/tree/master/notes/tips/jdk1.8/concurrent "线程")
 
 # Java 虚拟机
 
@@ -26,11 +26,11 @@
 
 # 其他
 
-* [**💻&nbsp;&nbsp;MySQL 索引优化**](https://github.com/zhengsh/document/blob/master/notes/other/mysql/%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96.MD "索引优化")
+* [**💻&nbsp;&nbsp;MySQL 索引优化**](https://github.com/zhengsh/document/blob/master/notes/tips/mysql/%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96.MD "索引优化")
 
 * [**😊&nbsp;&nbsp;MyBatis 详解**](https://github.com/zhengsh/document/blob/master/notes/mybatis/1_MyBatis_%E7%AE%80%E4%BB%8B%E5%92%8C%E5%85%A5%E9%97%A8.md "MyBatis 详解")
 
-* [**🚀&nbsp;&nbsp; 知识体系（可用于面试）**](https://github.com/zhengsh/document/tree/master/notes/interview "知识体系（可用于面试）")
+* [**🚀&nbsp;&nbsp; 知识体系（可用于面试）**](https://github.com/zhengsh/document/tree/master/notes/tips/interview "知识体系（可用于面试）")
 
 * [**🤔&nbsp;&nbsp; 思维导图（MySQL、Redis、Spring-Boot）**](https://www.processon.com/u/5e26625de4b00fbcc45e576d "思维导图")
 
