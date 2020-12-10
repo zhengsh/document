@@ -11,7 +11,7 @@
 
 
 2、类加载器深入剖析
- 
+
 * Java 虚拟机与程序的生命周期
 * 在如下几种情况下，Java虚拟机将结束生命周期
   * 执行了 System.exit() 方法，
@@ -20,6 +20,7 @@
   * 由于操作系统出现错误而导致Java虚拟机进程终止
   
   
+
 3、类的加载、连接与初始化
 * 加载：查找并加载类的二进制数据
 * 连接：
@@ -44,14 +45,14 @@
       * 初始化一个类的子类
       * Java 虚拟机启动时被标明为启动类的类（Java Test）
       * JDK1.7 开始提供的动态语言支持
-      java.lang.invoke.MethodHandle实例的解析记过REF_getStatic, 
+      java.lang.invoke.MethodHandle实例的解析结果REF_getStatic, 
       REF_putStatic,REF_invokeStatic 句柄对应的类没有初始化，则初始化
   * 注意：除了以上七种情况，其他使用Java类的方式被看作是对类的**被动使用**， 都不会导致类的初始化
   
 * 被动使用
   
 * 所有的Java虚拟机实现必须在每个类或接口被Java程序"首次主动使用" 时才会被加载
- 
+
 * 类的加载
   类的加载，是指类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的
 方法区内，然后在内存中创建一个java.lang.Class 对象（规范并未说明Class对象位于哪里，
