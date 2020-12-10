@@ -146,3 +146,47 @@ Disconnected from the target VM, address: '127.0.0.1:50657', transport: 'socket'
 
 Process finished with exit code 0
 ```
+
+Full GC 分析
+
+```shell
+{Heap before GC invocations=59 (full 0):
+ garbage-first heap   total 1048576K, used 749796K [0x00000000c0000000, 0x00000000c0102000, 0x0000000100000000)
+  region size 1024K, 614 young (628736K), 1 survivors (1024K)
+ Metaspace       used 58475K, capacity 61716K, committed 61952K, reserved 1103872K
+  class space    used 6996K, capacity 7589K, committed 7680K, reserved 1048576K
+558.395: [GC pause (G1 Evacuation Pause) (young), 0.0080795 secs]
+   [Parallel Time: 7.0 ms, GC Workers: 1]
+      [GC Worker Start (ms):  558395.5]
+      [Ext Root Scanning (ms):  3.6]
+      [Update RS (ms):  2.1]
+         [Processed Buffers:  212]
+      [Scan RS (ms):  0.3]
+      [Code Root Scanning (ms):  0.0]
+      [Object Copy (ms):  0.9]
+      [Termination (ms):  0.0]
+         [Termination Attempts:  1]
+      [GC Worker Other (ms):  0.0]
+      [GC Worker Total (ms):  7.0]
+      [GC Worker End (ms):  558402.5]
+   [Code Root Fixup: 0.0 ms]
+   [Code Root Purge: 0.0 ms]
+   [Clear CT: 0.4 ms]
+   [Other: 0.7 ms]
+      [Choose CSet: 0.0 ms]
+      [Ref Proc: 0.1 ms]
+      [Ref Enq: 0.0 ms]
+      [Redirty Cards: 0.0 ms]
+      [Humongous Register: 0.0 ms]
+      [Humongous Reclaim: 0.0 ms]
+      [Free CSet: 0.3 ms]
+   [Eden: 613.0M(613.0M)->0.0B(613.0M) Survivors: 1024.0K->1024.0K Heap: 732.2M(1024.0M)->119.3M(1024.0M)]
+Heap after GC invocations=60 (full 0):
+ garbage-first heap   total 1048576K, used 122168K [0x00000000c0000000, 0x00000000c0102000, 0x0000000100000000)
+  //分区大小1024K, 2个Region作为young, 1个Region Survivors, 其他的待分配
+  region size 1024K, 1 young (1024K), 1 survivors (1024K)
+ Metaspace       used 58475K, capacity 61716K, committed 61952K, reserved 1103872K
+  class space    used 6996K, capacity 7589K, committed 7680K, reserved 1048576K
+}
+```
+
