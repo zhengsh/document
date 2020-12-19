@@ -148,7 +148,7 @@ void rollback(boolean force)
 
 * 默认情况下，本地缓存数据可在整个 session 的周期内使用，这一缓存需要被用来解决循环引用错误和加快重复嵌套查询的速度，所以它可以不被禁用掉，但是你可以设置 localCacheScope=STATEMENT 表示缓存仅在语句执行时有效。
 
-* 注意，如果 localCacheScope 被设置为 SESSION， 那么 MyBatis 所返回的引用将传递给保存在本地缓存里相同的对象。返回的对象（例如：list）做出任何更新将会影响本地缓存的内容，而影响存活在sesssion 生命周期中的缓存缩所返回的值。因此，不要对MyBatis 所返回的对象做任何更改以防后患。
+* 注意，如果 localCacheScope 被设置为 SESSION， 那么 MyBatis 所返回的引用将传递给保存在本地缓存里相同的对象。返回的对象（例如：list）做出任何更新将会影响本地缓存的内容，而影响存活在 session 生命周期中的缓存缩所返回的值。因此，不要对MyBatis 所返回的对象做任何更改以防后患。
 
 * 清空本地缓存
 ```java

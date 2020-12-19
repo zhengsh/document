@@ -1,6 +1,8 @@
 ### 简介
 * MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的JDBC代码和手动参数以及获取结果集。
-MyBaits 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO （Plain Old Java Object, 普通老式 Java 对象）为数据库汇总的记录。 
+  MyBaits 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO （Plain Old Java Object, 普通老式 Java 对象）为数据库汇总的记录。 
+
+  [官网地址](https://mybatis.org/mybatis-3/zh/getting-started.html)
 
 ### 添加依赖
 ```xml
@@ -195,7 +197,7 @@ public interface BlogMapper {
   * **这类可以被实例化、使用和丢弃，一旦创建了 SqlSessionFactory, 就不再需要它了**。因此 SqlSessionFactoryBuilder 实例的最佳作用域是方法
   作用域（也就是局部方法变量）。你可以重用 SqlSessionFactoryBuilder 来创建多个 SqlSessionFactory 实例，但是最好还是不要让其以存在，
   以保证所有的 XML 解析资源可以被释放给更重要的事情。 
-   
+  
 * SqlSessionFactory
   * **SqlSessionFactory 一旦被创建就应该在应用的运行期间一直存在，没有任何理由丢弃它或重新创建一个实例**。使用SqlSessionFactory 的最佳实践
   是在应用运行期间不要重复创建多次，多次重建 SqlSessionFactory 被视为一种代码 bad smell 。因此 SqlSessionFactory 的最佳作用域是应用
@@ -225,4 +227,5 @@ public interface BlogMapper {
   }
   ```
   
+
 [MyBatis XML 配置 (next)](https://github.com/zhengsh/document/blob/master/notes/mybatis/2_MyBatis_XML%E9%85%8D%E7%BD%AE.md "MyBatis XML 配置")
